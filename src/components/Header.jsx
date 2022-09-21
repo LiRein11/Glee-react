@@ -1,27 +1,28 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
     <header className="header">
       <div className="container-large">
         <div className="header__inner">
-          <a className="logo" href="#">
+          <Link className="logo" to="/">
             <img className="logo__img" src="images/logo.png" alt="logo" />
-          </a>
+          </Link>
           <nav className="menu">
             <button className="menu__btn">
               <span></span>
             </button>
             <ul className="menu__list">
               <li className="menu__list-item">
-                <a className="menu__list-link" href="#">
+                <Link className="menu__list-link" to="/">
                   Home +
-                </a>
+                </Link>
               </li>
               <li className="menu__list-item">
-                <a className="menu__list-link" href="#">
+                <Link className="menu__list-link" to='/about'>
                   About
-                </a>
+                </Link>
               </li>
               <li className="menu__list-item">
                 <a className="menu__list-link" href="#">
@@ -39,9 +40,9 @@ const Header = () => {
                 </a>
               </li>
               <li className="menu__list-item">
-                <a className="menu__list-link" href="#">
+                <Link className="menu__list-link" to="/contact">
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
