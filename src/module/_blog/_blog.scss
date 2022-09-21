@@ -1,0 +1,232 @@
+.blog{
+  position: relative;
+  &__box{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 43px;
+    align-items: baseline;
+  }
+  &__box-title{
+    font-size: 36px;
+    color: #191919;
+    @extend %dmsans-700;
+  }
+  &__box-link{
+    font-size: 16px;
+    @extend %dmsans-700;
+    color: #262626;
+    padding-top: 7px;
+  }
+  &__items{
+    display: inline-block;
+    position: relative;
+    margin-bottom: 85px;
+    background-color: #fff;
+    z-index: 1;
+  }
+  &__items + .blog__items{
+    margin-left: 26px;
+  }
+  &__item-box{
+    padding: 30px 0px 15px 0px;
+    margin-left: 30px;
+    max-width: 315px;
+    border-bottom: 1px solid #e0e0e0;
+    position: relative;
+  }
+  &__item-title{
+    font-size: 18px;
+    @extend %dmsans-500;
+    color: #262626; 
+  }
+  &__item-news{
+    position: absolute;
+    width: 100px;
+    height: 30px;
+    background-color: $accent;
+    border-radius: 15px;
+    top: -16px;
+    left: -5px;
+    padding-left: 29px;
+    color: #fff;
+    @extend %poppins-700;
+    font-size: 14px;
+  }
+  &__item-info{
+    display: flex;
+    padding: 15px 0 20px 30px; 
+    font-size: 13px;
+    line-height: 30px;
+    color: #222933;
+    @extend %rubik-400
+  }
+  &__item-date{
+    margin-right: 30px;
+    position: relative;
+  }  
+  &__item-author{
+    font-size: 13px;
+    line-height: 30px;
+    color: #222933;
+    @extend %rubik-400;
+    position: relative;
+  } 
+  &::before{
+    z-index: 0;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 435px;
+    background-color: #fef7f0;
+    top: 332px;
+  }
+}
+
+.partners{
+  position: relative;
+  margin-bottom: 85px;
+  &__images{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    img{
+      object-fit: contain;
+    }
+  }
+}
+
+@media (max-width: 1220px){
+  .blog{
+    &__items{
+      display: inline;
+    }
+    &::before{
+      z-index: 0;
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 435px;
+      background-color: #fef7f0;
+      top: 1297px;
+    }
+    &::after{
+      z-index: -1;
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 200px;
+      background-color: #fef7f0;
+      top: 331px;
+    }
+    .container::after{
+      z-index: -2;
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 200px;
+      background-color: #fef7f0;
+      top: 814px;
+      right: 0;
+    }
+    &__box-title{
+      padding-right: 15px;
+    }
+  }
+}
+
+@media (max-width: 560px){
+  .blog{
+    &__box-title{
+      font-size: 28px;
+      padding-right: 15px;
+    }
+  }
+}
+
+@media (max-width: 440px){
+  .blog{
+    &__box-title{
+      font-size: 26px;
+      padding-right: 15px;
+    }
+    &__item-imglink{
+      display: none;
+    }
+    &::after{
+      z-index: -1;
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 200px;
+      background-color: #fef7f0;
+      top: 80px;
+    }
+    .container::after{
+      z-index: -2;
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 200px;
+      background-color: #fef7f0;
+      top: 313px;
+      right: 0;
+    }
+    &::before{
+      z-index: 0;
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 435px;
+      background-color: #fef7f0;
+      top: 548px;
+    }
+  }
+}
+
+@media (max-width: 415px){
+  .blog{
+    &__item-title{
+      font-size: 16px;
+    }
+    &::after{
+      z-index: -1;
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 200px;
+      background-color: #fef7f0;
+      top: 109px;
+    }
+    .container::after{
+      z-index: -2;
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 200px;
+      background-color: #fef7f0;
+      top: 340px;
+      right: 0;
+    }
+    &::before{
+      z-index: 0;
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 435px;
+      background-color: #fef7f0;
+      top: 571px;
+    }
+  }
+}
+
+@media (max-width: 375px){
+  .blog{
+    &__item-box{
+      margin-left: 0;
+    }
+    &__item-info{
+      padding: 15px 0 20px 0px
+    }
+  }
+}
+

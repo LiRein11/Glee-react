@@ -1,0 +1,154 @@
+.footer-top{
+  padding: 75px 0px 38px;
+  border-bottom: 1px solid #dae4e9;
+  display: flex;
+  &__contact{
+    width: 255px;
+    margin-right: 100px;
+  }
+  &__nav{
+    width: 170px;
+    margin-right: 130px;
+  }
+  &__item-form{
+    max-width: 270px;
+  }
+  &__link{
+    display: block;
+  }
+  &__logo{
+    display: block;
+    margin-bottom: 25px;
+  }
+  &__title{
+    @extend %dmsans-700;
+    font-size: 16px;
+    line-height: 52px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  &__address,
+  &__phone,
+  &__email{
+    display: block;
+    font-size: 14px;
+  }
+  &__text{
+    margin-bottom: 35px;
+    color: #7b7b7b;
+    font-size: 14px;
+    line-height: 24px;
+  }
+  &__form{
+    display: flex;
+  }
+  &__form-input{
+    max-width: 170px;
+    width: 100%;
+    height: 38px;
+    padding: 14px 16px;
+    background-color: #fef7f0;
+    border: none;
+    &::placeholder{
+      color: #234969;
+      font-size: 12px;
+      @extend %dmsans-400;
+    }
+  }
+  &__form-btn{
+    border: none;
+    background-color: $accent;
+    color: #fff;
+    width: 100px;
+    height: 38px;
+    @extend %dmsans-400;
+    font-size: 14px;
+    line-height: 21px;
+    cursor: pointer;
+  }
+}
+
+.footer-bottom{
+  display: flex;
+  justify-content: space-between;
+  padding: 35px 0 38px;
+  flex-wrap: wrap;
+  &__link--active{
+    position: relative;
+  }
+  &__link + .footer-bottom__link{
+    padding-left: 30px;
+  }
+  &__link--active::before{
+      content: "";
+      position: absolute;
+      width: 1px;
+      height: 18px;
+      background-color: #7b7b7b;
+      left: 13px;
+      top: -1px;
+  }
+  &__copy{
+    color: $text;
+    font-size: 14px;
+    line-height: 32px;
+  }
+}
+
+@media (max-width: 1220px){
+  .footer-top{
+    padding: 140px 0 38px;
+  }
+}
+
+@media (max-width: 1100px){
+  .footer-top{
+    flex-wrap: wrap;
+    &__item-form{
+      margin-top: 15px;
+      max-width: 100%;
+    }
+    &__contact{
+      margin-right: 60px;
+    }
+    &__nav{
+      margin-right: 40px;
+    }
+    &__text{
+      margin-bottom: 15px;
+    }
+  }
+}
+
+@media (max-width: 770px){
+  .footer-top{
+    &__contact{
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 15px;
+    }
+  }
+}
+
+@media (max-width: 685px){
+  .footer-top{
+    padding: 50px 0 38px;
+  }
+}
+
+@media (max-width: 630px){
+  .footer-bottom{
+    justify-content: center;
+    padding: 17px 0 19px;
+    &__copy{
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+
+@media (max-width: 440px){
+  .footer-top{
+    padding: 0 0 38px;
+  }
+}

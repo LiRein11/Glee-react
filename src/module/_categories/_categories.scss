@@ -1,0 +1,119 @@
+.categories{
+  margin-bottom: 100px;
+}
+
+.categories-info{
+  display: flex;
+  justify-content: space-between;
+  &__item{
+    width: 870px;
+    height: 390px;
+    background-color: #feefe2;
+    padding-left: 410px;
+  }
+  &__item-one{
+    position: relative;
+  }
+  &__item-two{
+    position: relative;
+  }
+  &__item-images--one{
+    position: absolute;
+    right: 55%;
+    bottom: 100px;
+  }
+  &__item-images--two{
+    position: absolute;
+    right: 60%;
+    bottom: 83px;
+  }
+  &__item-title{
+    padding-top: 90px;
+    padding-bottom: 10px;
+    font-size: 26px;
+    line-height: 32px;
+    @extend %dmsans-700;
+    color: $default;
+  }
+  &__item-text{
+    color: $default;
+    padding-bottom: 20px;
+    line-height: 32px;
+  }
+  &__item-btn{
+    @extend %rubik-500;
+    font-size: 15px;
+    line-height: 12px;
+    @extend %btn;
+    background-color: #feefe2;
+    padding: 20px 85px 20px 15px;
+    color: #436372;
+    border: 1px solid #b3b7b5;
+    width: 180px;
+    height: 60px;
+    position: relative;
+    border-radius: 5px;
+  }
+  &__item-btn::after{
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 9px;
+    background-image: url('../../images/icons/arrow-color.svg');
+    right: 21px;
+    bottom: 25px;
+  }
+}
+
+@media (max-width: 1400px){
+  .categories-info{
+    &__item{
+    width: 100%;
+    padding-left: 300px;
+    }
+  }
+}
+
+@media (max-width: 1400px){
+  .categories-info{
+    &__item{
+    padding-left: 250px;
+    }
+  }
+}
+
+@media (max-width: 1100px){
+  .categories-info{
+    flex-wrap: wrap;
+    &__item-images--one{
+      display: none;
+    }
+    &__item-images--two{
+      display: none;
+    }
+    &__item{
+      padding: 0;
+      height: 100%;
+      border: 1px solid #e8e4df;
+      padding-left: 15px;
+    }
+    &__item-title{
+      padding-top: 20px;
+    }
+    &__item-btn{
+      margin-bottom: 20px;
+    }
+    &__item-text{
+      width: 100%;
+    }
+    br{
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 375px){
+  .container-large{
+    padding: 0;
+  }
+}
