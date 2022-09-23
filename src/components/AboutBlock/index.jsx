@@ -2,7 +2,7 @@ import React from 'react';
 import Footer from '../Footer';
 import Header from '../Header';
 
-import styles from './AboutBlock.scss'
+import styles from './AboutBlock.module.scss'
 
 const AboutBlock = () => {
   return (

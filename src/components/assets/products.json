@@ -1,0 +1,50 @@
+[
+  {
+    "id": 0,
+    "imageUrl": "../../../public/images/products/1.png",
+    "title": "Wooden Radio",
+    "price": 29.00
+  },
+  {
+    "id": 1,
+    "imageUrl": "images/products/2.png",
+    "title": "Wooden Radio",
+    "price": 29.00
+  },
+  {
+    "id": 2,
+    "imageUrl": "images/products/3.png",
+    "title": "Wooden Radio",
+    "price": 29.00
+  },
+  {
+    "id": 3,
+    "imageUrl": "images/products/4.png",
+    "title": "Wooden Radio",
+    "price": 29.00
+  },
+  {
+    "id": 4,
+    "imageUrl": "images/products/5.png",
+    "title": "Wooden Radio",
+    "price": 29.00
+  },
+  {
+    "id": 5,
+    "imageUrl": "images/products/6.png",
+    "title": "Wooden Radio",
+    "price": 29.00
+  },
+  {
+    "id": 6,
+    "imageUrl": "images/products/7.png",
+    "title": "Wooden Radio",
+    "price": 29.00
+  },
+  {
+    "id": 7,
+    "imageUrl": "images/products/8.png",
+    "title": "Wooden Radio",
+    "price": 29.00
+  }
+]

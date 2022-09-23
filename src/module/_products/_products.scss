@@ -1,30 +1,40 @@
-.products{
+.products {
   margin-bottom: 185px;
-  &__title{
+  &__title {
     text-align: center;
     padding: 75px 0 30px;
     font-size: 36px;
     @extend %dmsans-700;
     color: #191919;
   }
-  &__filter-btn{
-    text-align: center;
+  &__filter-li {
+    // text-align: center;
+    display: flex;
+    justify-content: center;
+    margin-right: 30px;
   }
-  &__btn{
+  &__li {
+    cursor: pointer;
     border: none;
     background-color: #fff;
     color: #8b8b8b;
     font-size: 16px;
     @extend %dmsans-700;
     padding: 0;
-    & + .products__btn{
-      padding-left: 30px;
-    }
+    padding-left: 30px;
   }
-  .mixitup-control-active{
+  &__li--active  {
+    cursor: pointer;
+    border: none;
+    background-color: #fff;
+    color: #8b8b8b;
+    font-size: 16px;
     color: #191919;
+    @extend %dmsans-700;
+    padding: 0;
+    padding-left: 30px;
   }
-  &__items{
+  &__items {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
@@ -33,34 +43,36 @@
   }
 }
 
-.products-item{
+.products-item {
   width: 270px;
   height: 365px;
-  position: relative; 
+  position: relative;
   box-shadow: 0px 6px 47px 3px rgba(37, 37, 37, 0.05);
-  &__img-box{
+  &__img-box {
     overflow: hidden;
-    &:hover{
-      .products-item__link-box{
+    &:hover {
+      .products-item__link-box {
         transform: translateY(-140%);
       }
     }
   }
-  &__centr{
+  &__centr {
     height: 240px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  &__images{
+  &__images {
     object-fit: cover;
   }
-  &__link-box{
-    transition: all .3s;
-    padding-left: 55px;
+  &__link-box {
+    transition: all 0.3s;
     transform: translateY(500%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  &__link{
+  &__link {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -68,33 +80,34 @@
     height: 45px;
     border-radius: 50%;
     background-color: #fff;
-    & svg{
+    border: none;
+    & svg {
       fill: $default;
     }
-    & + .products-item__link{
+    & + .products-item__link {
       margin-left: 10px;
     }
   }
-  &__link:hover{
+  &__link:hover {
     background-color: $accent;
-    & svg{
+    & svg {
       fill: #fff;
     }
   }
-  &__wrapper-box{
+  &__wrapper-box {
     position: absolute;
     width: 100%;
     bottom: 0px;
     text-align: center;
     padding-bottom: 35px;
   }
-  &__title{
+  &__title {
     font-size: 16px;
     line-height: 40px;
     color: $default;
     @extend %dmsans-500;
   }
-  &__price{
+  &__price {
     font-size: 16px;
     line-height: 40px;
     color: $accent;
@@ -103,48 +116,48 @@
   }
 }
 
-@media (max-width: 1200px){
-  .products{
-    &__items{
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+@media (max-width: 1200px) {
+  .products {
+    &__items {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
     }
   }
-  .products-item{
+  .products-item {
     width: 100%;
   }
 }
 
-@media (max-width: 900px){
-  .products{
+@media (max-width: 900px) {
+  .products {
     margin-bottom: 100px;
-    &__items{
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    &__items {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
     }
   }
 }
 
-@media (max-width: 630px){
-  .products{
-    &__items{
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(1, 1fr);
-    padding-top: 50px;
+@media (max-width: 630px) {
+  .products {
+    &__items {
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: repeat(1, 1fr);
+      padding-top: 50px;
     }
-    &__title{
+    &__title {
       padding: 40px 0 20px;
       font-size: 30px;
     }
   }
 }
 
-@media (max-width: 440px){
-  .products{
-    &__items{
+@media (max-width: 440px) {
+  .products {
+    &__items {
       padding-top: 30px;
     }
-    &__title{
+    &__title {
       font-size: 26px;
       padding: 30px 0 15px;
     }

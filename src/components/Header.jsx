@@ -1,7 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { CountContext } from '../App';
 
 const Header = () => {
+  const { countCart, countHeart } = React.useContext(CountContext);
+  // const [count, setCount] = React.useState(0);
+
+  // const onClickCountPlus = () => {
+  //   setCount(count + 1);
+  // };
+
   return (
     <header className="header">
       <div className="container-large">
@@ -20,7 +28,7 @@ const Header = () => {
                 </Link>
               </li>
               <li className="menu__list-item">
-                <Link className="menu__list-link" to='/about'>
+                <Link className="menu__list-link" to="/about">
                   About
                 </Link>
               </li>
@@ -53,11 +61,11 @@ const Header = () => {
             <div className="user-nav__box">
               <a className="user-nav__heart" href="#">
                 <img className="user-nav__heart-img" src="images/icons/heart.svg" alt="heart" />
-                <span className="user-nav__num">0</span>
+                <span className="user-nav__num">{countHeart}</span>
               </a>
               <a className="user-nav__cart" href="#">
                 <img className="user-nav__cart-img" src="images/icons/cart.svg" alt="cart" />
-                <span className="user-nav__num">0</span>
+                <span className="user-nav__num">{countCart}</span>
               </a>
             </div>
             <button className="user-nav__btn">
