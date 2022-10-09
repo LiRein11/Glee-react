@@ -10,10 +10,9 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import ProductDetails from './pages/ProductDetails';
 import Terms from './pages/Terms';
-
+ 
 import './scss/index.scss';
 import './scss/style.scss';
-
 
 export const CountContext = React.createContext();
 

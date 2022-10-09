@@ -37,10 +37,14 @@
   &__items {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
     gap: 28px;
     padding-top: 90px;
   }
+}
+
+@keyframes ani {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
 }
 
 .products-item {
@@ -48,6 +52,8 @@
   height: 365px;
   position: relative;
   box-shadow: 0px 6px 47px 3px rgba(37, 37, 37, 0.05);
+  opacity: 0;
+  animation: ani 1.25s forwards;
   &__img-box {
     overflow: hidden;
     &:hover {

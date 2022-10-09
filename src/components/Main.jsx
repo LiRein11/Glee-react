@@ -2,16 +2,29 @@ import React from 'react';
 import ProductItem from './ProductItem';
 import Slider from './Slider';
 
-import products from './assets/products.json'
+import products from './assets/products.json';
+import designProducts from './assets/designProducts.json';
+import DesignItem from './DesignItem';
 
 const Main = () => {
   const [activeIndex, setActiveIndex] = React.useState(0);
+  const [activeDesignIndex, setActiveDesignIndex] = React.useState(0);
+  const [filterCategory, setFilterCategory] = React.useState(0);
+  const [filterDesignCategory, setFilterDesignCategory] = React.useState(0);
 
   const filterCategories = ['All', 'Furnitures', 'Chairs', 'Lighting', 'Decor'];
+  const filterDesignCategories = ['All', 'Furnitures', 'Chairs', 'Lighting', 'Decor'];
 
   const onClickFilter = (index) => {
     setActiveIndex(index);
+    setFilterCategory(index);
   };
+
+  const onClickDesignFilter = (index) => {
+    setActiveDesignIndex(index);
+    setFilterDesignCategory(index);
+  };
+
   return (
     <main className="main">
       <section className="top-slider">
@@ -104,7 +117,7 @@ const Main = () => {
         <div className="container" data-ref="products">
           <h3 className="products__title">Products of the week</h3>
           <ul className="products__filter-li">
-            {filterCategories.map((value,i) => (
+            {filterCategories.map((value, i) => (
               <li
                 onClick={() => onClickFilter(i)}
                 className={activeIndex === i ? 'products__li--active' : 'products__li'}>
@@ -113,17 +126,15 @@ const Main = () => {
             ))}
           </ul>
           <div className="products__items">
-            {products.map((obj)=>(
-              <ProductItem/>
-            ))}
-            {/* <ProductItem imgUrl="images/products/1.png" dataOrder="1" />
-            <ProductItem imgUrl="images/products/2.png" dataOrder="2" />
-            <ProductItem imgUrl="images/products/3.png" dataOrder="3" />
-            <ProductItem imgUrl="images/products/4.png" dataOrder="4" />
-            <ProductItem imgUrl="images/products/5.png" dataOrder="5" />
-            <ProductItem imgUrl="images/products/6.png" dataOrder="6" />
-            <ProductItem imgUrl="images/products/7.png" dataOrder="7" />
-            <ProductItem imgUrl="images/products/8.png" dataOrder="8" /> */}
+            {filterCategory === 0
+              ? products.map((obj) => (
+                  <>
+                    <ProductItem products={obj} />
+                  </>
+                ))
+              : products.map((obj) =>
+                  obj.category === filterCategory ? <ProductItem products={obj} /> : '',
+                )}
           </div>
         </div>
       </section>
@@ -163,72 +174,25 @@ const Main = () => {
       <section className="design">
         <div className="container" data-ref="design">
           <h3 className="design__title">New Design</h3>
-          <div className="design__filter-btn">
-            <button className="design__btn products__btn--active" data-filter="all">
-              All
-            </button>
-            <button className="design__btn" data-filter=".category-a">
-              Furnitures
-            </button>
-            <button className="design__btn" data-filter=".category-b">
-              Chairs
-            </button>
-            <button className="design__btn" data-filter=".category-c">
-              Lighting
-            </button>
-            <button className="design__btn" data-filter=".category-d">
-              Decor
-            </button>
-          </div>
+          <ul className="products__filter-li">
+            {filterDesignCategories.map((value, i) => (
+              <li
+                onClick={() => onClickDesignFilter(i)}
+                className={activeDesignIndex === i ? 'products__li--active' : 'products__li'}>
+                {value}
+              </li>
+            ))}
+          </ul>
           <div className="design__items">
-            <a
-              className="design__item mix category-a"
-              data-order="1"
-              href="#"
-              style={{ backgroundImage: "url('images/design/1.png')" }}>
-              <h4 className="design__item-title">Beat Flat Pendant Black</h4>
-              <span className="design__item-text">Classic</span>
-            </a>
-            <a
-              className="design__item mix category-a"
-              data-order="2"
-              href="#"
-              style={{ backgroundImage: "url('images/design/2.png')" }}>
-              <h4 className="design__item-title">Lampe Sur Pieds Bamboo</h4>
-              <span className="design__item-text">Classic</span>
-            </a>
-            <a
-              className="design__item mix category-a"
-              data-order="3"
-              href="#"
-              style={{ backgroundImage: "url('images/design/3.png')" }}>
-              <h4 className="design__item-title">Rattan Rocking Chair</h4>
-              <span className="design__item-text">Classic</span>
-            </a>
-            <a
-              className="design__item mix category-b"
-              data-order="4"
-              href="#"
-              style={{ backgroundImage: "url('images/design/4.png')" }}>
-              <h4 className="design__item-title">Rattan Rocking Chair</h4>
-              <span className="design__item-text">Classic</span>
-            </a>
-            <a
-              className="design__item mix category-c"
-              data-order="5"
-              href="#"
-              style={{ backgroundImage: "url('images/design/5.png')" }}>
-              <h4 className="design__item-title">Rattan Rocking Chair</h4>
-              <span className="design__item-text">Classic</span>
-            </a>
-            <a
-              className="design__item mix category-d"
-              data-order="6"
-              href="#"
-              style={{ backgroundImage: "url('images/design/6.png')" }}>
-              <h4 className="design__item-title">Lampe Sur Pieds Bamboo</h4>
-              <span className="design__item-text">Classic</span>
-            </a>
+            {filterDesignCategory === 0
+              ? designProducts.map((obj) => (
+                  <>
+                    <DesignItem products={obj} />
+                  </>
+                ))
+              : designProducts.map((obj) =>
+                  obj.category === filterDesignCategory ? <DesignItem products={obj} /> : '',
+                )}
           </div>
         </div>
       </section>

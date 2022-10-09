@@ -26,13 +26,15 @@
   }
   &__items{
     display: grid;
-    height: 525px;
-    grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(3, 1fr);
     row-gap: 35px;
     column-gap: 30px;
   }
+
   &__item{
+    opacity: 0;
+  animation: ani 1.25s forwards;
+    height: 262px;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -50,6 +52,11 @@
     font-size: 16px;
     padding-left: 25px;
   }
+}
+
+@keyframes ani {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
 }
 
 @media (max-width: 1100px){
