@@ -13,6 +13,10 @@ import Terms from './pages/Terms';
 import './scss/index.scss';
 import './scss/style.scss';
 
+import { Provider } from 'react-redux';
+
+import { store } from './store';
+
 export interface IS {
   countCart: number;
   countHeart: number;
@@ -40,28 +44,32 @@ const App: FC = () => {
 
   return (
     <>
-      <CountContext.Provider
-        value={{
-          countCart,
-          setCountCart,
-          countHeart,
-          setCountHeart,
-          onClickCountPlusCart,
-          onClickCountPlusHeart,
-        }}>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/about' element={<About />} />
-          <Route path='/blogDetails' element={<BlogDetails />} />
-          <Route path='/blog' element={<Blog />} />
-          <Route path='/catalogOne' element={<CatalogOne />} />
-          <Route path='/catalogTwo' element={<CatalogTwo />} />
-          <Route path='/contact' element={<Contact />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/productDetails' element={<ProductDetails />} />
-          <Route path='/terms' element={<Terms />} />
-        </Routes>
-      </CountContext.Provider>
+      <Provider store={store}>
+        <CountContext.Provider
+          value={{
+            countCart,
+            setCountCart,
+            countHeart,
+            setCountHeart,
+            onClickCountPlusCart,
+            onClickCountPlusHeart,
+          }}>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/blogDetails' element={<BlogDetails />} />
+            <Route path='/blog' element={<Blog />} />
+            <Route path='/catalogOne' element={<CatalogOne />} />
+            <Route path='/catalogTwo' element={<CatalogTwo />} />
+            <Route path='/contact' element={<Contact />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/registration' element={<Login />} />
+            <Route path='/account' element={<Login />} />
+            <Route path='/productDetails' element={<ProductDetails />} />
+            <Route path='/terms' element={<Terms />} />
+          </Routes>
+        </CountContext.Provider>
+      </Provider>
     </>
   );
 };

@@ -5,7 +5,7 @@ import Slider from './Slider';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import DesignItem from './DesignItem';
-import { IProducts } from './products.interface';
+import { IProductItem, IProducts } from './products.interface';
 
 async function fetchProducts() {
   const { data } = await axios.get<IProducts>('http://localhost:5000/api/device');
