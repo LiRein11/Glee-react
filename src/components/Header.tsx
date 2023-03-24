@@ -1,8 +1,11 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { CountContext } from '../App';
+import { RootState } from '../store';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
+  const cart = useSelector((state:RootState)=>state.cart)
   const { countCart, countHeart } = React.useContext(CountContext);
   // const [count, setCount] = React.useState(0);
 
@@ -69,10 +72,10 @@ const Header = () => {
                 <img className='user-nav__heart-img' src='images/icons/heart.svg' alt='heart' />
                 <span className='user-nav__num'>{countHeart}</span>
               </a>
-              <a className='user-nav__cart' href='#'>
+              <NavLink className='user-nav__cart' to='/cart'>
                 <img className='user-nav__cart-img' src='images/icons/cart.svg' alt='cart' />
-                <span className='user-nav__num'>{countCart}</span>
-              </a>
+                <span className='user-nav__num'>{cart.count}</span>
+              </NavLink>
             </div>
             <button className='user-nav__btn' onClick={click}>
               <img className='user-nav__btn-img' src='images/navuser-btn.png' alt='btn' />

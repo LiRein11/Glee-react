@@ -6,6 +6,17 @@ import axios from 'axios';
 import { useQuery } from 'react-query';
 import DesignItem from './DesignItem';
 import { IProductItem, IProducts } from './products.interface';
+// import { addProduct } from '../store/slices/cartSlice'; 
+import { AppDispatch, RootState } from '../store'; 
+
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  setActiveIndex,
+  setFilterCategory,
+  setActiveDesignIndex,
+  setFilterDesignCategory,
+} from '../store/slices/filterSlice';
+import { fetchOneBasket } from '../store/slices/cartSlice';
 
 async function fetchProducts() {
   const { data } = await axios.get<IProducts>('http://localhost:5000/api/device');
@@ -14,24 +25,25 @@ async function fetchProducts() {
 }
 
 const Main = () => {
+  const {filter, cart} = useSelector((state: RootState) => state);
+  const dispatch = useDispatch<AppDispatch>();
+  // console.log(cart.count, 'bbvsa')
   const { data, isLoading, isError } = useQuery('products', fetchProducts);
-  console.log(data);
-  const [activeIndex, setActiveIndex] = React.useState(0);
-  const [activeDesignIndex, setActiveDesignIndex] = React.useState(0);
-  const [filterCategory, setFilterCategory] = React.useState(0);
-  const [filterDesignCategory, setFilterDesignCategory] = React.useState(0);
-
-  const filterCategories = ['All', 'Furnitures', 'Lighting', 'Chairs', 'Decor'];
-  const filterDesignCategories = ['All', 'Furnitures', 'Lighting', 'Chairs', 'Decor'];
+  React.useEffect(() => {
+    dispatch(fetchOneBasket());
+  }, []);
+  // const addToCart= (obj)=>{
+  //   dispatch(addProduct(obj))
+  // }
 
   const onClickFilter = (index: number) => {
-    setActiveIndex(index);
-    setFilterCategory(index);
+    dispatch(setActiveIndex(index));
+    dispatch(setFilterCategory(index));
   };
 
   const onClickDesignFilter = (index: number) => {
-    setActiveDesignIndex(index);
-    setFilterDesignCategory(index);
+    dispatch(setActiveDesignIndex(index));
+    dispatch(setFilterDesignCategory(index));
   };
 
   return (
@@ -126,10 +138,10 @@ const Main = () => {
         <div className='container' data-ref='products'>
           <h3 className='products__title'>Products of the week</h3>
           <ul className='products__filter-li'>
-            {filterCategories.map((value, i) => (
+            {filter.filterCategories.map((value, i) => (
               <li
                 onClick={() => onClickFilter(i)}
-                className={activeIndex === i ? 'products__li--active' : 'products__li'}
+                className={filter.activeIndex === i ? 'products__li--active' : 'products__li'}
                 key={i}>
                 {value}
               </li>
@@ -137,12 +149,12 @@ const Main = () => {
           </ul>
           <div className='products__items'>
             {data
-              ? filterCategory === 0
+              ? filter.filterCategory === 0
                 ? data.map((obj) => (
                     <>{obj.text !== 'Classic' ? <ProductItem item={obj} key={obj.id} /> : ''}</>
                   ))
                 : data.map((obj) =>
-                    obj.typeId === filterCategory && obj.text !== 'Classic' ? (
+                    obj.typeId === filter.filterCategory && obj.text !== 'Classic' ? (
                       <ProductItem item={obj} key={obj.id} />
                     ) : (
                       ''
@@ -189,10 +201,10 @@ const Main = () => {
         <div className='container' data-ref='design'>
           <h3 className='design__title'>New Design</h3>
           <ul className='products__filter-li'>
-            {filterDesignCategories.map((value, i) => (
+            {filter.filterDesignCategories.map((value, i) => (
               <li
                 onClick={() => onClickDesignFilter(i)}
-                className={activeDesignIndex === i ? 'products__li--active' : 'products__li'}
+                className={filter.activeDesignIndex === i ? 'products__li--active' : 'products__li'}
                 key={i}>
                 {value}
               </li>
@@ -200,12 +212,12 @@ const Main = () => {
           </ul>
           <div className='design__items'>
             {data
-              ? filterDesignCategory === 0
+              ? filter.filterDesignCategory === 0
                 ? data.map((obj) => (
                     <>{obj.text === 'Classic' ? <DesignItem item={obj} key={obj.id} /> : ''}</>
                   ))
                 : data.map((obj) =>
-                    obj.typeId === filterDesignCategory && obj.text === 'Classic' ? (
+                    obj.typeId === filter.filterDesignCategory && obj.text === 'Classic' ? (
                       <DesignItem item={obj} key={obj.id} />
                     ) : (
                       ''

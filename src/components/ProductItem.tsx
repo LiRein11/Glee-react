@@ -3,8 +3,39 @@ import { CountContext } from '../App';
 
 import { useNavigate } from 'react-router-dom';
 import { IProductItem } from './products.interface';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../store';
+// import { addProduct } from '../store/slices/cartSlice';
+import { $authHost } from '../http';
+import { fetchOneBasket, setCount } from '../store/slices/cartSlice';
+// import { addItemToCart } from '../store/slices/cartSlice';
 
-const ProductItem: FC<{item:IProductItem}> = ( {item} ) => {
+const ProductItem: FC<{ item: IProductItem }> = ({ item }) => {
+  const { cart } = useSelector((state: RootState) => state);
+  const dispatch = useDispatch<AppDispatch>();
+  console.log(cart, 'sa');
+  // const addToBasketServer = async (id: any) => {
+  //   const { data } = await $authHost.post('api/basket', id);
+  //   return data;
+  // };
+
+  const addDeviceToBasket = async (device: IProductItem) => {
+    const { data } = await $authHost.post('/api/basket', device);
+    return data;
+  };
+
+  // const addToCart = (obj: IProductItem) => {
+  //   // cart.count+=1
+  //   addDeviceToBasket(obj);
+  //   // dispatch(addItemToCart(obj));
+  // };
+  const addToCart = (obj: IProductItem) => {
+    addDeviceToBasket(obj);
+    dispatch(fetchOneBasket());
+    const count = cart.count
+    dispatch(setCount(count + 1));
+  };
+
   const navigate = useNavigate();
 
   const { onClickCountPlusCart, onClickCountPlusHeart } = React.useContext(CountContext);
@@ -42,7 +73,7 @@ const ProductItem: FC<{item:IProductItem}> = ( {item} ) => {
               </g>
             </svg>
           </button>
-          <button onClick={onClickCountPlusCart} className='products-item__link'>
+          <button onClick={() => addToCart(item)} className='products-item__link'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               width='20px'
