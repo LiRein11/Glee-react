@@ -151,11 +151,11 @@ const Main = () => {
             {data
               ? filter.filterCategory === 0
                 ? data.map((obj) => (
-                    <>{obj.text !== 'Classic' ? <ProductItem item={obj} key={obj.id} /> : ''}</>
+                    <>{obj.text !== 'Classic' ? <ProductItem device={obj} key={obj.id} /> : ''}</>
                   ))
                 : data.map((obj) =>
                     obj.typeId === filter.filterCategory && obj.text !== 'Classic' ? (
-                      <ProductItem item={obj} key={obj.id} />
+                      <ProductItem device={obj} key={obj.id}/>
                     ) : (
                       ''
                     ),

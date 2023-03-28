@@ -22,9 +22,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import filterReducer from './slices/filterSlice';
 import cart from './slices/cartSlice';
+import thunk from 'redux-thunk';
+import { applyMiddleware } from '@reduxjs/toolkit';
 
 export const store = configureStore({
   reducer: { filter: filterReducer, cart },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

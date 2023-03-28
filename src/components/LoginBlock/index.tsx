@@ -12,13 +12,12 @@ import '../../scss/login.scss';
 const LoginBlock: React.FC = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  console.log(password);
+
   const location = useLocation();
   const isLogin = location.pathname === '/login';
   const navigate = useNavigate();
 
   const token = localStorage.getItem('token');
-  console.log(token);
 
   // const pokemons = useStore((state) => state.pokemons);
   // const removePokemon = useStore((state) => state.removePokemon);
@@ -47,7 +46,12 @@ const LoginBlock: React.FC = () => {
   const info = () => {
     if (token) {
       const data: any = jwt_decode(token);
-      console.log(data);
+      // const dateNow = new Date()
+      // if(data.exp < dateNow.getTime()){
+      //   localStorage.removeItem('token')
+      //   navigate('/login')
+      // }
+      // console.log(data, dateNow.getTime());
       return (
         <>
           <div>Email: {data.email}</div>

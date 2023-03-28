@@ -6,22 +6,28 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchOneBasket } from '../../store/slices/cartSlice';
 import { AppDispatch, RootState } from '../../store';
 import ProductItem from '../ProductItem';
+import { IBasketDevice, IProductItem } from '../products.interface';
 
 const BlockCart = () => {
-  
-  const {cart} = useSelector((state: RootState) => state.cart);
+  const { cart, totalPrice } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch<AppDispatch>();
-  console.log(cart)
-  
+  console.log(cart);
+
   React.useEffect(() => {
     dispatch(fetchOneBasket());
   }, []);
+
   return (
     <>
       <Header />
-      {/* {cart.items.map((obj)=>{
-        <ProductItem item={obj} key={obj.id} />
-      })} */}
+      <div className='container'>
+        <h2>${totalPrice}</h2>
+        <div className='products__items'>
+          {cart?.items.map((obj) => (
+            <ProductItem device={obj.device} key={obj.id} id={obj.id}/>
+          ))}
+        </div>
+      </div>
       <Footer />
     </>
   );

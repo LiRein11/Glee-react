@@ -3,10 +3,12 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { CountContext } from '../App';
 import { RootState } from '../store';
 import { useSelector } from 'react-redux';
+import { check } from '../http/userAPI';
 
 const Header = () => {
   const cart = useSelector((state:RootState)=>state.cart)
   const { countCart, countHeart } = React.useContext(CountContext);
+
   // const [count, setCount] = React.useState(0);
 
   // const onClickCountPlus = () => {
@@ -16,6 +18,13 @@ const Header = () => {
 
   const click = () => {
     const token = localStorage.getItem('token');
+
+    //   if(token){
+    //   check().then((data)=>{
+        
+    //   }    
+    //   // data? localStorage.setItem('token') : 
+    // })
     navigate(token ? '/account' : '/login');
   };
 
