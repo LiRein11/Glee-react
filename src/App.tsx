@@ -17,6 +17,7 @@ import { Provider } from 'react-redux';
 
 import { store } from './store';
 import Cart from './pages/Cart';
+import Favorites from './pages/Favorites';
 
 export interface IS {
   countCart: number;
@@ -69,6 +70,7 @@ const App: FC = () => {
             <Route path='/productDetails' element={<ProductDetails />} />
             <Route path='/terms' element={<Terms />} />
             <Route path='/cart' element={<Cart />} />
+            <Route path='/favorites' element={<Favorites />} />
           </Routes>
         </CountContext.Provider>
       </Provider>

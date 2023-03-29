@@ -5,9 +5,9 @@ import Slider from './Slider';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import DesignItem from './DesignItem';
-import { IProductItem, IProducts } from './products.interface';
-// import { addProduct } from '../store/slices/cartSlice'; 
-import { AppDispatch, RootState } from '../store'; 
+import { IProducts } from './products.interface';
+// import { addProduct } from '../store/slices/cartSlice';
+import { AppDispatch, RootState } from '../store';
 
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -25,10 +25,11 @@ async function fetchProducts() {
 }
 
 const Main = () => {
-  const {filter, cart} = useSelector((state: RootState) => state);
+  const { filter, cart } = useSelector((state: RootState) => state);
   const dispatch = useDispatch<AppDispatch>();
   // console.log(cart.count, 'bbvsa')
   const { data, isLoading, isError } = useQuery('products', fetchProducts);
+  console.log(data);
   React.useEffect(() => {
     dispatch(fetchOneBasket());
   }, []);
@@ -155,7 +156,7 @@ const Main = () => {
                   ))
                 : data.map((obj) =>
                     obj.typeId === filter.filterCategory && obj.text !== 'Classic' ? (
-                      <ProductItem device={obj} key={obj.id}/>
+                      <ProductItem device={obj} key={obj.id} />
                     ) : (
                       ''
                     ),

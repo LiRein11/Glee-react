@@ -8,19 +8,28 @@ import { AppDispatch, RootState } from '../store';
 // import { addProduct } from '../store/slices/cartSlice';
 
 import { fetchOneBasket, setDeleteDevice } from '../store/slices/cartSlice';
-import { addDeviceToBasket, deleteDeviceFromBasket } from '../http/deviceAPI';
+import { addDeviceToBasket, deleteDeviceFromBasket, toggleFavorites } from '../http/deviceAPI';
+import { useMutation } from 'react-query';
+import { useFavorites } from './Favorites/useFavorites';
 // import { addItemToCart } from '../store/slices/cartSlice';
 
-const ProductItem: FC<IBasketDevice> = ( device ) => {
+const ProductItem: FC<IBasketDevice> = (device) => {
+  const [isToggled, setIsToggled] = React.useState(false);
+
   const { cart } = useSelector((state: RootState) => state);
   const dispatch = useDispatch<AppDispatch>();
   const location = useLocation();
+  const { favoritesDevices, isLoading, refetch } = useFavorites();
 
   const pathCart = location.pathname === '/cart';
-
+console.log(favoritesDevices)
   const addToCart = async (id: number) => {
     await addDeviceToBasket(id);
     dispatch(fetchOneBasket());
+  };
+
+  const clickFavorites = (deviceId: number) => {
+    toggleFavorites(deviceId);
   };
 
   const clickDeleteDeviceFromBasket = async (device: IBasketDevice) => {
@@ -36,6 +45,24 @@ const ProductItem: FC<IBasketDevice> = ( device ) => {
     //   return;
     // }
   };
+
+  React.useEffect(() => {
+    if (!favoritesDevices) return;
+
+    const isHasDevice = favoritesDevices.some((f: any) => f.id === device.device.id); // Проверка в избранном ли девайс
+
+    if (isToggled !== isHasDevice) setIsToggled(isHasDevice);
+  }, [favoritesDevices, isToggled, device.device.id]);
+
+  const { mutateAsync } = useMutation('update favorites', () => toggleFavorites(device.device.id), {
+    onError: (error) => {
+      console.log(error);
+    },
+    onSuccess() {
+      setIsToggled(!isToggled);
+      refetch();
+    },
+  });
 
   const navigate = useNavigate();
 
@@ -90,7 +117,7 @@ const ProductItem: FC<IBasketDevice> = ( device ) => {
                 </g>
               </svg>
             </button>
-            <button onClick={onClickCountPlusHeart} className='products-item__link'>
+            <button onClick={() => mutateAsync()} className='products-item__link'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 width='20px'

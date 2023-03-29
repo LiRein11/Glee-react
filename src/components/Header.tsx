@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { CountContext } from '../App';
 import { RootState } from '../store';
 import { useSelector } from 'react-redux';
-import { check } from '../http/userAPI';
+import { useFavorites } from './Favorites/useFavorites';
 
-const Header = () => {
-  const cart = useSelector((state:RootState)=>state.cart)
+const Header: FC = () => {
+  const cart = useSelector((state: RootState) => state.cart);
+  const { favoritesDevices, isLoading, refetch } = useFavorites();
+
   const { countCart, countHeart } = React.useContext(CountContext);
 
   // const [count, setCount] = React.useState(0);
@@ -14,17 +16,15 @@ const Header = () => {
   // const onClickCountPlus = () => {
   //   setCount(count + 1);
   // };
+
+  React.useEffect(() => {
+    refetch();
+  }, [favoritesDevices]);
+
   const navigate = useNavigate();
 
   const click = () => {
     const token = localStorage.getItem('token');
-
-    //   if(token){
-    //   check().then((data)=>{
-        
-    //   }    
-    //   // data? localStorage.setItem('token') : 
-    // })
     navigate(token ? '/account' : '/login');
   };
 
@@ -77,10 +77,10 @@ const Header = () => {
               <img className='user-nav__search-img' src='images/icons/search.svg' alt='search' />
             </a>
             <div className='user-nav__box'>
-              <a className='user-nav__heart' href='#'>
+              <NavLink className='user-nav__heart' to='/favorites'>
                 <img className='user-nav__heart-img' src='images/icons/heart.svg' alt='heart' />
-                <span className='user-nav__num'>{countHeart}</span>
-              </a>
+                <span className='user-nav__num'>{isLoading ? '' : favoritesDevices.length}</span>
+              </NavLink>
               <NavLink className='user-nav__cart' to='/cart'>
                 <img className='user-nav__cart-img' src='images/icons/cart.svg' alt='cart' />
                 <span className='user-nav__num'>{cart.count}</span>
