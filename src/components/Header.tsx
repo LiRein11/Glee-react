@@ -19,7 +19,7 @@ const Header: FC = () => {
 
   React.useEffect(() => {
     refetch();
-  }, [favoritesDevices]);
+  }, []);
 
   const navigate = useNavigate();
 

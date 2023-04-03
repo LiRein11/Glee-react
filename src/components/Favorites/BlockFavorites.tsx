@@ -8,7 +8,7 @@ import { IProductItem } from '../products.interface';
 
 const BlockFavorites = () => {
   const { favoritesDevices, isLoading } = useFavorites();
-
+    
   return (
     <>
       <Header />

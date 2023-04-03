@@ -23,7 +23,7 @@
     padding: 0;
     padding-left: 30px;
   }
-  &__li--active  {
+  &__li--active {
     cursor: pointer;
     border: none;
     background-color: #fff;
@@ -43,8 +43,12 @@
 }
 
 @keyframes ani {
-  0% {opacity: 0;}
-  100% {opacity: 1;}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .products-item {
@@ -105,6 +109,20 @@
     & svg {
       fill: #fff;
     }
+  }
+  &__link-active {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: red;
+    border: none;
+    & svg {
+      fill: #fff;
+    }
+    margin-left: 10px;
   }
   &__wrapper-box {
     position: absolute;

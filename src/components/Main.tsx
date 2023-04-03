@@ -17,6 +17,7 @@ import {
   setFilterDesignCategory,
 } from '../store/slices/filterSlice';
 import { fetchOneBasket } from '../store/slices/cartSlice';
+import { useFavorites } from './Favorites/useFavorites';
 
 async function fetchProducts() {
   const { data } = await axios.get<IProducts>('http://localhost:5000/api/device');
@@ -28,11 +29,13 @@ const Main = () => {
   const { filter, cart } = useSelector((state: RootState) => state);
   const dispatch = useDispatch<AppDispatch>();
   // console.log(cart.count, 'bbvsa')
-  const { data, isLoading, isError } = useQuery('products', fetchProducts);
-  console.log(data);
+  const { data, isError } = useQuery('products', fetchProducts);
+  const { favoritesDevices, isLoading, refetch } = useFavorites();
+
   React.useEffect(() => {
     dispatch(fetchOneBasket());
-  }, []);
+  }, [favoritesDevices]);
+
   // const addToCart= (obj)=>{
   //   dispatch(addProduct(obj))
   // }
