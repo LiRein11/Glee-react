@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ProductItem from './ProductItem';
 import Slider from './Slider';
 
@@ -15,20 +15,17 @@ import {
   setFilterCategory,
   setActiveDesignIndex,
   setFilterDesignCategory,
+  fetchTypesThunk,
 } from '../store/slices/filterSlice';
 import { fetchOneBasket } from '../store/slices/cartSlice';
 import { useFavorites } from './Favorites/useFavorites';
-
-async function fetchProducts() {
-  const { data } = await axios.get<IProducts>('http://localhost:5000/api/device');
-
-  return data.rows;
-}
+import { fetchProducts } from '../http/deviceAPI';
 
 const Main = () => {
   const { filter, cart } = useSelector((state: RootState) => state);
   const dispatch = useDispatch<AppDispatch>();
   // console.log(cart.count, 'bbvsa')
+  console.log(filter);
   const { data, isError } = useQuery('products', fetchProducts);
   const { favoritesDevices, isLoading, refetch } = useFavorites();
 
@@ -36,6 +33,9 @@ const Main = () => {
     dispatch(fetchOneBasket());
   }, [favoritesDevices]);
 
+  React.useEffect(() => {
+    dispatch(fetchTypesThunk());
+  }, []);
   // const addToCart= (obj)=>{
   //   dispatch(addProduct(obj))
   // }
@@ -142,12 +142,12 @@ const Main = () => {
         <div className='container' data-ref='products'>
           <h3 className='products__title'>Products of the week</h3>
           <ul className='products__filter-li'>
-            {filter.filterCategories.map((value, i) => (
+            {filter.filterCategories.map((value: any, i: number) => (
               <li
                 onClick={() => onClickFilter(i)}
                 className={filter.activeIndex === i ? 'products__li--active' : 'products__li'}
-                key={i}>
-                {value}
+                key={value.id}>
+                {value.name}
               </li>
             ))}
           </ul>

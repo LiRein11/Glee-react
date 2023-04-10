@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { CountContext } from '../App';
 import { RootState } from '../store';
 import { useSelector } from 'react-redux';
 import { useFavorites } from './Favorites/useFavorites';
@@ -8,8 +7,6 @@ import { useFavorites } from './Favorites/useFavorites';
 const Header: FC = () => {
   const cart = useSelector((state: RootState) => state.cart);
   const { favoritesDevices, isLoading, refetch } = useFavorites();
-
-  const { countCart, countHeart } = React.useContext(CountContext);
 
   // const [count, setCount] = React.useState(0);
 
@@ -55,10 +52,32 @@ const Header: FC = () => {
                   Services
                 </a>
               </li>
-              <li className='menu__list-item'>
+              <li className='menu__list-item menu__list-item--active'>
                 <a className='menu__list-link' href='#'>
-                  Pages +
+                  Pages
                 </a>
+                <div className='abd'>
+                  <div className='abdd'>
+                    <NavLink className='menu__list-link' to='/catalogOne'>
+                      CatalogOne
+                    </NavLink>
+                    <NavLink className='menu__list-link' to='/catalogTwo'>
+                      CatalogTwo
+                    </NavLink>
+                    <NavLink className='menu__list-link' to='/productDetails'>
+                      ProductDetails
+                    </NavLink>
+                    <NavLink className='menu__list-link' to='/terms'>
+                      Terms
+                    </NavLink>
+                    <NavLink className='menu__list-link' to='/blogDetails'>
+                      BlogDetails
+                    </NavLink>
+                    <NavLink className='menu__list-link' to='/blog'>
+                      Blog
+                    </NavLink>
+                  </div>
+                </div>
               </li>
               <li className='menu__list-item'>
                 <a className='menu__list-link' href='#'>

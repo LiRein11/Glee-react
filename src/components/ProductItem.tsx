@@ -1,21 +1,18 @@
 import React, { FC } from 'react';
-import { CountContext } from '../App';
 
 import { useLocation, useNavigate } from 'react-router-dom';
-import { IBasketDevice, IProductItem } from './products.interface';
+import { IBasketDevice } from './products.interface';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../store';
 // import { addProduct } from '../store/slices/cartSlice';
 
 import { fetchOneBasket, setDeleteDevice } from '../store/slices/cartSlice';
-import { addDeviceToBasket, deleteDeviceFromBasket, toggleFavorites } from '../http/deviceAPI';
-import { useMutation } from 'react-query';
-import { useFavorites } from './Favorites/useFavorites';
+import { addDeviceToBasket } from '../http/deviceAPI';
 import ButtonFavorites from './Favorites/ButtonFavorites';
 // import { addItemToCart } from '../store/slices/cartSlice';
 
 const ProductItem: FC<IBasketDevice> = (device) => {
-  const { cart } = useSelector((state: RootState) => state);
+  // const { cart } = useSelector((state: RootState) => state);
   const dispatch = useDispatch<AppDispatch>();
   const location = useLocation();
 
@@ -46,7 +43,6 @@ const ProductItem: FC<IBasketDevice> = (device) => {
 
   const navigate = useNavigate();
 
-  const { onClickCountPlusCart, onClickCountPlusHeart } = React.useContext(CountContext);
   return (
     <div className='products-item'>
       <div className='products-item__img-box'>
