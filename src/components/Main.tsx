@@ -142,10 +142,15 @@ const Main = () => {
         <div className='container' data-ref='products'>
           <h3 className='products__title'>Products of the week</h3>
           <ul className='products__filter-li'>
+            <li
+              onClick={() => onClickFilter(0)}
+              className={filter.activeIndex === 0 ? 'products__li--active' : 'products__li'}>
+              All
+            </li>
             {filter.filterCategories.map((value: any, i: number) => (
               <li
-                onClick={() => onClickFilter(i)}
-                className={filter.activeIndex === i ? 'products__li--active' : 'products__li'}
+                onClick={() => onClickFilter(i + 1)}
+                className={filter.activeIndex === i + 1 ? 'products__li--active' : 'products__li'}
                 key={value.id}>
                 {value.name}
               </li>
@@ -205,12 +210,17 @@ const Main = () => {
         <div className='container' data-ref='design'>
           <h3 className='design__title'>New Design</h3>
           <ul className='products__filter-li'>
-            {filter.filterDesignCategories.map((value, i) => (
+            <li
+              onClick={() => onClickDesignFilter(0)}
+              className={filter.activeDesignIndex === 0 ? 'products__li--active' : 'products__li'}>
+              All
+            </li>
+            {filter.filterDesignCategories.map((value: any, i: number) => (
               <li
-                onClick={() => onClickDesignFilter(i)}
-                className={filter.activeDesignIndex === i ? 'products__li--active' : 'products__li'}
-                key={i}>
-                {value}
+                onClick={() => onClickDesignFilter(i+1)}
+                className={filter.activeDesignIndex === i+1 ? 'products__li--active' : 'products__li'}
+                key={value.id}>
+                {value.name}
               </li>
             ))}
           </ul>

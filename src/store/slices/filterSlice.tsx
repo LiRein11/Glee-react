@@ -16,7 +16,8 @@ export interface FilterSlice {
   filterCategory: number;
   filterDesignCategory: number;
   filterCategories: any;
-  filterDesignCategories: string[];
+  filterDesignCategories: any;
+  activeIndexArr:number[]
 }
 
 const initialState: FilterSlice = {
@@ -27,7 +28,8 @@ const initialState: FilterSlice = {
   filterCategory: 0,
   filterDesignCategory: 0,
   filterCategories: [],
-  filterDesignCategories: ['All', 'Furnitures', 'Lighting', 'Chairs', 'Decor'],
+  filterDesignCategories: [],
+  activeIndexArr: [],
 };
 
 const filterSlice = createSlice({
@@ -46,6 +48,11 @@ const filterSlice = createSlice({
     setFilterDesignCategory(state, action: PayloadAction<number>) {
       state.filterDesignCategory = action.payload;
     },
+    toggleActiveIndexArr(state,action:PayloadAction<number>){
+      state.activeIndexArr.includes(action.payload)
+        ? state.activeIndexArr = state.activeIndexArr.filter((el) => el !== action.payload)
+        : state.activeIndexArr.push(action.payload);
+    }
   },
   extraReducers: {
     [fetchTypesThunk.pending]: (state) => {
@@ -55,6 +62,7 @@ const filterSlice = createSlice({
     [fetchTypesThunk.fulfilled]: (state, action) => {
       state.status = 'resolved';
       state.filterCategories = (action.payload);
+      state.filterDesignCategories = action.payload;
     },
     [fetchTypesThunk.rejected]: (state, action) => {
       state.status = 'rejected';
@@ -63,6 +71,11 @@ const filterSlice = createSlice({
   },
 });
 
-export const { setActiveIndex, setFilterCategory, setActiveDesignIndex, setFilterDesignCategory } =
-  filterSlice.actions;
+export const {
+  setActiveIndex,
+  setFilterCategory,
+  setActiveDesignIndex,
+  setFilterDesignCategory,
+  toggleActiveIndexArr,
+} = filterSlice.actions;
 export default filterSlice.reducer; // Редюсер, отвечает за изменение состояния

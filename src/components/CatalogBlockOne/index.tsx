@@ -6,20 +6,34 @@ import axios from 'axios';
 import { fetchProducts, getTypes } from '../../http/deviceAPI';
 import { useQuery } from 'react-query';
 import ProductItem from '../ProductItem';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchOneBasket } from '../../store/slices/cartSlice';
-import { AppDispatch } from '../../store';
-import { fetchTypesThunk } from '../../store/slices/filterSlice';
+import { AppDispatch, RootState } from '../../store';
+import { fetchTypesThunk, toggleActiveIndexArr } from '../../store/slices/filterSlice';
 
 const CatalogBlockOne = () => {
+  const { filter } = useSelector((state: RootState) => state);
   const { data, isLoading } = useQuery('fetchTypes', getTypes);
   const { data: devices } = useQuery('products', fetchProducts);
   const dispatch = useDispatch<AppDispatch>();
+  console.log(filter.activeIndexArr);
+  const [checkedArr, setCheckedArr] = React.useState<boolean[]>([]);
 
   useEffect(() => {
     dispatch(fetchOneBasket());
     dispatch(fetchTypesThunk());
-  }, []);
+    setCheckedArr(new Array(data?.length).fill(false));
+  }, [dispatch, data]);
+  console.log(checkedArr);
+  const handleCheck = (index) => {
+    const newCheckedArr = [...checkedArr];
+    newCheckedArr[index] = !newCheckedArr[index];
+    setCheckedArr(newCheckedArr);
+  };
+
+  const toggleTypes = (index: number) => {
+    dispatch(toggleActiveIndexArr(index));
+  };
 
   return (
     <>
@@ -75,15 +89,25 @@ const CatalogBlockOne = () => {
                   <form className='filter-category__form' action='#'>
                     {isLoading
                       ? ''
-                      : data.map((el: any) => (
+                      : checkedArr
+                      ? data.map((el: any, index: number) => (
                           <label className='filter-category__label' key={el.id}>
-                            <input className='filter-category__input' type='checkbox' />
+                            <input
+                              className='filter-category__input'
+                              type='checkbox'
+                              value={el.name || ''}
+                              name={el.name}
+                              defaultChecked={checkedArr[index]}
+                              onChange={() => handleCheck(index)}
+                              onClick={() => toggleTypes(index + 1)}
+                            />
                             <div className='filter-category__checkbox'>
                               <span>{el.name}</span>
                               <span>{'>'}</span>
                             </div>
                           </label>
-                        ))}
+                        ))
+                      : ''}
                   </form>
                 </div>
                 <div className='filter__item filter-price'>
@@ -197,9 +221,15 @@ const CatalogBlockOne = () => {
               </div>
               <div className='catalog-content'>
                 <div className='catalog-content__items'>
-                  {devices?.map((el) => (
-                    <ProductItem device={el} key={el.id} />
-                  ))}
+                  {filter.activeIndexArr.length === 0
+                    ? devices?.map((el) => <ProductItem device={el} key={el.id} />)
+                    : devices?.map((el) =>
+                        filter.activeIndexArr.includes(el.typeId) ? (
+                          <ProductItem device={el} key={el.id} />
+                        ) : (
+                          ''
+                        ),
+                      )}
                 </div>
                 <div className='pagination'>
                   <a className='pagination__prev pagination__arrow' href='#'>
