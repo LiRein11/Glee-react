@@ -130,6 +130,7 @@ a {
     display: block;
     font-size: 16px;
     color: #243f4d;
+    cursor: pointer;
   }
   &__link--active {
     background-color: $accent;
@@ -144,6 +145,16 @@ a {
   }
   &__prev {
     margin-right: 15px;
+    background-color: transparent;
+    &:disabled{
+     opacity: 0.3
+    }
+  }
+  &__next {
+    background-color: transparent;
+    &:disabled{
+     opacity: 0.3
+    }
   }
 }
 

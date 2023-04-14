@@ -4,41 +4,26 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { IBasketDevice } from './products.interface';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../store';
-// import { addProduct } from '../store/slices/cartSlice';
 
 import { fetchOneBasket, setDeleteDevice } from '../store/slices/cartSlice';
-import { addDeviceToBasket } from '../http/deviceAPI';
+import { addDeviceToBasket, getBrands } from '../http/deviceAPI';
 import ButtonFavorites from './Favorites/ButtonFavorites';
-// import { addItemToCart } from '../store/slices/cartSlice';
+import { useQuery } from 'react-query';
 
 const ProductItem: FC<IBasketDevice> = (device) => {
-  // const { cart } = useSelector((state: RootState) => state);
   const dispatch = useDispatch<AppDispatch>();
   const location = useLocation();
+  const { data: brands, isLoading: loadingBrands } = useQuery('fetchBrands', getBrands);
 
   const pathCart = location.pathname === '/cart';
-  // console.log(favoritesDevices)
+
   const addToCart = async (id: number) => {
     await addDeviceToBasket(id);
     dispatch(fetchOneBasket());
   };
 
-  // const clickFavorites = (deviceId: number) => {
-  //   toggleFavorites(deviceId);
-  // };
-
   const clickDeleteDeviceFromBasket = async (device: IBasketDevice) => {
     await dispatch(setDeleteDevice(device));
-
-    // dispatch(fetchOneBasket());
-
-    // if (id) {
-    //   cart.cart.items.filter((item) => {
-    //     return item.id !== id;
-    //   });
-    // } else {
-    //   return;
-    // }
   };
 
   const navigate = useNavigate();
@@ -46,6 +31,9 @@ const ProductItem: FC<IBasketDevice> = (device) => {
   return (
     <div className='products-item'>
       <div className='products-item__img-box'>
+        <div className='products-item__brand'>
+          <p>{loadingBrands || !brands[device.device.brandId - 1] ? '' : brands[device.device.brandId - 1].name}</p>
+        </div>
         {device.device.img === 'c533adb7-596c-4fb9-9ba1-ad2793ee757e.jpg' ? (
           <span className='products-item__centrr'>
             <img

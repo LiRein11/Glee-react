@@ -98,7 +98,7 @@ const Header: FC = () => {
             <div className='user-nav__box'>
               <NavLink className='user-nav__heart' to='/favorites'>
                 <img className='user-nav__heart-img' src='images/icons/heart.svg' alt='heart' />
-                <span className='user-nav__num'>{isLoading ? '' : favoritesDevices.length}</span>
+                <span className='user-nav__num'>{isLoading ? '' : favoritesDevices?.length}</span>
               </NavLink>
               <NavLink className='user-nav__cart' to='/cart'>
                 <img className='user-nav__cart-img' src='images/icons/cart.svg' alt='cart' />

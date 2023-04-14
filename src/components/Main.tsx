@@ -19,14 +19,14 @@ import {
 } from '../store/slices/filterSlice';
 import { fetchOneBasket } from '../store/slices/cartSlice';
 import { useFavorites } from './Favorites/useFavorites';
-import { fetchProducts } from '../http/deviceAPI';
+import { fetchDevices } from '../http/deviceAPI';
 
 const Main = () => {
   const { filter, cart } = useSelector((state: RootState) => state);
   const dispatch = useDispatch<AppDispatch>();
   // console.log(cart.count, 'bbvsa')
   console.log(filter);
-  const { data, isError } = useQuery('products', fetchProducts);
+  const { data, isError } = useQuery(['devices', null, null], () => fetchDevices(null, null));
   const { favoritesDevices, isLoading, refetch } = useFavorites();
 
   React.useEffect(() => {
@@ -217,8 +217,10 @@ const Main = () => {
             </li>
             {filter.filterDesignCategories.map((value: any, i: number) => (
               <li
-                onClick={() => onClickDesignFilter(i+1)}
-                className={filter.activeDesignIndex === i+1 ? 'products__li--active' : 'products__li'}
+                onClick={() => onClickDesignFilter(i + 1)}
+                className={
+                  filter.activeDesignIndex === i + 1 ? 'products__li--active' : 'products__li'
+                }
                 key={value.id}>
                 {value.name}
               </li>

@@ -44,14 +44,15 @@
   }
   &__label {
     cursor: pointer;
-    margin-bottom: 0px
+    margin-bottom: 0px;
   }
-  &__input {
-    @extend %checkbox-hidden;
-    &:checked + .filter-category__checkbox {
-      background-color: #edf1f4;
-    }
-  }
+  // &__input {
+  //   @extend %checkbox-hidden;
+  //   &:checked + .filter-category__checkbox {
+  //     background-color: #edf1f4;
+  //   }
+  // }
+
   &__checkbox {
     background-color: #fff;
     color: #243f4d;
@@ -61,6 +62,16 @@
     font-size: 16px;
     @extend %rubik-400;
     line-height: 40px;
+  }
+  &__checkbox--active {
+    color: #243f4d;
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    @extend %rubik-400;
+    line-height: 40px;
+    background-color: #edf1f4;
   }
 }
 
@@ -109,8 +120,12 @@
 
 .filter-brand {
   margin-bottom: 55px;
+  &__form {
+    display: grid;
+  }
   &__label {
     cursor: pointer;
+    margin-bottom: 0px;
   }
   &__input {
     @extend %checkbox-hidden;
@@ -174,7 +189,6 @@
   &__items {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(4, 1fr);
     column-gap: 30px;
     row-gap: 40px;
     margin-bottom: 105px;
@@ -279,6 +293,7 @@
   &__slide {
     margin-right: 70px;
   }
+  
   &__content {
     width: 540px;
   }

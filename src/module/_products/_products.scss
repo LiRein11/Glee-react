@@ -66,6 +66,16 @@
       }
     }
   }
+  &__brand{
+    position: absolute;
+    right: 20px;
+    top: 0px;
+    padding: 0px 20px 0px 20px;
+    border-radius: 15px;
+    background-color: #edf1f4;
+    top: 18px;
+  
+  }
   &__centr {
     height: 240px;
     display: flex;

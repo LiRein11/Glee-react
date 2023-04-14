@@ -2,37 +2,65 @@ import React, { useEffect } from 'react';
 import Footer from '../Footer';
 import Header from '../Header';
 import { NavLink } from 'react-router-dom';
-import axios from 'axios';
-import { fetchProducts, getTypes } from '../../http/deviceAPI';
+
+import { fetchDevices, fetchDevicesAll, getBrands, getTypes } from '../../http/deviceAPI';
 import { useQuery } from 'react-query';
 import ProductItem from '../ProductItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchOneBasket } from '../../store/slices/cartSlice';
 import { AppDispatch, RootState } from '../../store';
-import { fetchTypesThunk, toggleActiveIndexArr } from '../../store/slices/filterSlice';
+import {
+  fetchBrandsThunk,
+  fetchTypesThunk,
+  toggleActiveIndexArrBrands,
+  toggleActiveIndexArrTypes,
+} from '../../store/slices/filterSlice';
 
 const CatalogBlockOne = () => {
   const { filter } = useSelector((state: RootState) => state);
-  const { data, isLoading } = useQuery('fetchTypes', getTypes);
-  const { data: devices } = useQuery('products', fetchProducts);
+  const { data: types, isLoading: loadingTypes } = useQuery('fetchTypes', getTypes);
+  const { data: brands, isLoading: loadingBrands } = useQuery('fetchBrands', getBrands);
+  const { data: allDevices } = useQuery('fetchAllDevices', fetchDevicesAll);
+  const [brandId, setBrandId] = React.useState(filter.activeIndexBrands);
+  const [typeId, setTypeId] = React.useState(filter.activeIndexTypes);
+  const [page, setPage] = React.useState(1);
+  const [limit, setLimit] = React.useState(9);
+  const pageNumbers: any = [];
   const dispatch = useDispatch<AppDispatch>();
-  console.log(filter.activeIndexArr);
-  const [checkedArr, setCheckedArr] = React.useState<boolean[]>([]);
+  const { data: devices, refetch } = useQuery(['devices', brandId, typeId, page, limit], () =>
+    fetchDevices(brandId, typeId, page, limit),
+  );
 
   useEffect(() => {
     dispatch(fetchOneBasket());
     dispatch(fetchTypesThunk());
-    setCheckedArr(new Array(data?.length).fill(false));
-  }, [dispatch, data]);
-  console.log(checkedArr);
-  const handleCheck = (index) => {
-    const newCheckedArr = [...checkedArr];
-    newCheckedArr[index] = !newCheckedArr[index];
-    setCheckedArr(newCheckedArr);
+    dispatch(fetchBrandsThunk());
+  }, []);
+
+  useEffect(() => {
+    refetch();
+  }, [typeId, brandId]);
+
+  const toggleTypes = async (index: number | null) => {
+    dispatch(toggleActiveIndexArrTypes(index));
+    setTypeId(index);
   };
 
-  const toggleTypes = (index: number) => {
-    dispatch(toggleActiveIndexArr(index));
+  const toggleBrands = (index: number | null) => {
+    dispatch(toggleActiveIndexArrBrands(index));
+    setBrandId(index);
+  };
+
+  for (
+    let i: number = 1;
+    i <= Math.ceil(allDevices !== undefined ? allDevices.length / limit : 0);
+    i++
+  ) {
+    pageNumbers.push(i);
+  }
+
+  const onClickPagination = (index) => {
+    setPage(index + 1);
   };
 
   return (
@@ -87,27 +115,34 @@ const CatalogBlockOne = () => {
                     <span>CATEGORY</span>
                   </h4>
                   <form className='filter-category__form' action='#'>
-                    {isLoading
+                    <div className='filter-category__label'>
+                      <div
+                        onClick={() => toggleTypes(null)}
+                        className={
+                          filter.activeIndexTypes === null
+                            ? 'filter-category__checkbox--active'
+                            : 'filter-category__checkbox'
+                        }>
+                        <span>All</span>
+                        <span>{'>'}</span>
+                      </div>
+                    </div>
+                    {loadingTypes
                       ? ''
-                      : checkedArr
-                      ? data.map((el: any, index: number) => (
-                          <label className='filter-category__label' key={el.id}>
-                            <input
-                              className='filter-category__input'
-                              type='checkbox'
-                              value={el.name || ''}
-                              name={el.name}
-                              defaultChecked={checkedArr[index]}
-                              onChange={() => handleCheck(index)}
+                      : types?.map((el: any, index: number) => (
+                          <div className='filter-category__label' key={el.id}>
+                            <div
                               onClick={() => toggleTypes(index + 1)}
-                            />
-                            <div className='filter-category__checkbox'>
+                              className={
+                                index + 1 === filter.activeIndexTypes
+                                  ? 'filter-category__checkbox--active'
+                                  : 'filter-category__checkbox'
+                              }>
                               <span>{el.name}</span>
                               <span>{'>'}</span>
                             </div>
-                          </label>
-                        ))
-                      : ''}
+                          </div>
+                        ))}
                   </form>
                 </div>
                 <div className='filter__item filter-price'>
@@ -117,7 +152,7 @@ const CatalogBlockOne = () => {
                   <form className='filter-price__form' action='#'>
                     <input
                       className='filter-price__input'
-                      type='text'
+                      type='range'
                       data-min='0'
                       data-max='800'
                       data-from='100'
@@ -138,41 +173,34 @@ const CatalogBlockOne = () => {
                     <span>BRAND</span>
                   </h4>
                   <form className='filter-brand__form' action='#'>
-                    <label className='filter-brand__label'>
-                      <input className='filter-brand__input' type='checkbox' defaultChecked />
-                      <div className='filter-brand__checkbox'>
-                        <span>RFL</span>
-                        <span className='filter-brand__num'>(10)</span>
+                    <div className='filter-category__label'>
+                      <div
+                        onClick={() => toggleBrands(null)}
+                        className={
+                          filter.activeIndexBrands === null
+                            ? 'filter-category__checkbox--active'
+                            : 'filter-category__checkbox'
+                        }>
+                        <span>All</span>
+                        <span className='filter-brand__num'>({allDevices?.length})</span>
                       </div>
-                    </label>
-                    <label className='filter-brand__label'>
-                      <input className='filter-brand__input' type='checkbox' />
-                      <div className='filter-brand__checkbox'>
-                        <span>Brother</span>
-                        <span className='filter-brand__num'>(21)</span>
-                      </div>
-                    </label>
-                    <label className='filter-brand__label'>
-                      <input className='filter-brand__input' type='checkbox' />
-                      <div className='filter-brand__checkbox'>
-                        <span>Regal</span>
-                        <span className='filter-brand__num'>(3)</span>
-                      </div>
-                    </label>
-                    <label className='filter-brand__label'>
-                      <input className='filter-brand__input' type='checkbox' />
-                      <div className='filter-brand__checkbox'>
-                        <span>Nadia</span>
-                        <span className='filter-brand__num'>(14)</span>
-                      </div>
-                    </label>
-                    <label className='filter-brand__label'>
-                      <input className='filter-brand__input' type='checkbox' />
-                      <div className='filter-brand__checkbox'>
-                        <span>Otobi</span>
-                        <span className='filter-brand__num'>(6)</span>
-                      </div>
-                    </label>
+                    </div>
+                    {loadingBrands
+                      ? ''
+                      : brands?.map((el: any, index: number) => (
+                          <div className='filter-category__label' key={el.id}>
+                            <div
+                              onClick={() => toggleBrands(index + 1)}
+                              className={
+                                index + 1 === filter.activeIndexBrands
+                                  ? 'filter-category__checkbox--active'
+                                  : 'filter-category__checkbox'
+                              }>
+                              <span>{el.name}</span>
+                              <span className='filter-brand__num'>({el.devicesCount})</span>
+                            </div>
+                          </div>
+                        ))}
                   </form>
                 </div>
                 <div className='filter__item filter-products'>
@@ -221,40 +249,41 @@ const CatalogBlockOne = () => {
               </div>
               <div className='catalog-content'>
                 <div className='catalog-content__items'>
-                  {filter.activeIndexArr.length === 0
-                    ? devices?.map((el) => <ProductItem device={el} key={el.id} />)
-                    : devices?.map((el) =>
-                        filter.activeIndexArr.includes(el.typeId) ? (
-                          <ProductItem device={el} key={el.id} />
-                        ) : (
-                          ''
-                        ),
-                      )}
+                  {devices?.map((el) => (
+                    <ProductItem device={el} key={el.id} />
+                  ))}
                 </div>
+
                 <div className='pagination'>
-                  <a className='pagination__prev pagination__arrow' href='#'>
+                  <button
+                    className='pagination__prev pagination__arrow'
+                    onClick={page === 1 ? () => setPage(page) : () => setPage(page - 1)}
+                    disabled={page === 1 ? true : false}>
                     Previous
-                  </a>
+                  </button>
                   <ul className='pagination__list'>
-                    <li className='pagination__item'>
-                      <a className='pagination__link pagination__link--active' href='#'>
-                        1
-                      </a>
-                    </li>
-                    <li className='pagination__item'>
-                      <a className='pagination__link' href='#'>
-                        2
-                      </a>
-                    </li>
-                    <li className='pagination__item'>
-                      <a className='pagination__link' href='#'>
-                        3
-                      </a>
-                    </li>
+                    {pageNumbers.map((el, i) => (
+                      <li className='pagination__item'>
+                        <div
+                          className={
+                            i === page - 1
+                              ? 'pagination__link pagination__link--active'
+                              : 'pagination__link'
+                          }
+                          onClick={() => onClickPagination(i)}>
+                          {el}
+                        </div>
+                      </li>
+                    ))}
                   </ul>
-                  <a className='pagination__next pagination__arrow' href='#'>
+                  <button
+                    className='pagination__next pagination__arrow'
+                    onClick={
+                      page === pageNumbers.length ? () => setPage(page) : () => setPage(page + 1)
+                    }
+                    disabled={page === pageNumbers.length ? true : false}>
                     Next
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>

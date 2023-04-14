@@ -8,6 +8,12 @@ export const fetchTypesThunk: any = createAsyncThunk('cart/fetchTypesThunk', asy
   return data;
 }); // ts ????????
 
+export const fetchBrandsThunk: any = createAsyncThunk('cart/fetchBrandsThunk', async () => {
+  const { data, status } = await $host.get('api/brand');
+  if (status !== 200) throw new Error('Server error!');
+  return data;
+}); // ts ????????
+
 export interface FilterSlice {
   status: string | null;
   error: any;
@@ -17,7 +23,9 @@ export interface FilterSlice {
   filterDesignCategory: number;
   filterCategories: any;
   filterDesignCategories: any;
-  activeIndexArr:number[]
+  filterBrands: any;
+  activeIndexTypes: number | null;
+  activeIndexBrands: number | null;
 }
 
 const initialState: FilterSlice = {
@@ -29,7 +37,9 @@ const initialState: FilterSlice = {
   filterDesignCategory: 0,
   filterCategories: [],
   filterDesignCategories: [],
-  activeIndexArr: [],
+  filterBrands: [],
+  activeIndexTypes: null,
+  activeIndexBrands: null,
 };
 
 const filterSlice = createSlice({
@@ -48,11 +58,23 @@ const filterSlice = createSlice({
     setFilterDesignCategory(state, action: PayloadAction<number>) {
       state.filterDesignCategory = action.payload;
     },
-    toggleActiveIndexArr(state,action:PayloadAction<number>){
-      state.activeIndexArr.includes(action.payload)
-        ? state.activeIndexArr = state.activeIndexArr.filter((el) => el !== action.payload)
-        : state.activeIndexArr.push(action.payload);
-    }
+    toggleActiveIndexArrTypes(state, action: PayloadAction<number|null>) {
+      state.activeIndexTypes = action.payload;
+      // state.activeIndexArrTypes.includes(action.payload)
+      // ? (state.activeIndexArrTypes = state.activeIndexArrTypes.filter(
+      //       (el) => el !== action.payload,
+      //     ))
+      //   : state.activeIndexArrTypes.push(action.payload);
+    },
+    toggleActiveIndexArrBrands(state, action: PayloadAction<number|null>) {
+      state.activeIndexBrands = action.payload;
+
+      // state.activeIndexBrands.includes(action.payload)
+      //   ? (state.activeIndexBrands = state.activeIndexBrands.filter(
+      //       (el) => el !== action.payload,
+      //     ))
+      //   : state.activeIndexBrands.push(action.payload);
+    },
   },
   extraReducers: {
     [fetchTypesThunk.pending]: (state) => {
@@ -61,10 +83,22 @@ const filterSlice = createSlice({
     },
     [fetchTypesThunk.fulfilled]: (state, action) => {
       state.status = 'resolved';
-      state.filterCategories = (action.payload);
+      state.filterCategories = action.payload;
       state.filterDesignCategories = action.payload;
     },
     [fetchTypesThunk.rejected]: (state, action) => {
+      state.status = 'rejected';
+      state.error = action.payload;
+    },
+    [fetchBrandsThunk.pending]: (state) => {
+      state.status = 'loading';
+      state.error = null;
+    },
+    [fetchBrandsThunk.fulfilled]: (state, action) => {
+      state.status = 'resolved';
+      state.filterBrands = action.payload;
+    },
+    [fetchBrandsThunk.rejected]: (state, action) => {
       state.status = 'rejected';
       state.error = action.payload;
     },
@@ -76,6 +110,7 @@ export const {
   setFilterCategory,
   setActiveDesignIndex,
   setFilterDesignCategory,
-  toggleActiveIndexArr,
+  toggleActiveIndexArrTypes,
+  toggleActiveIndexArrBrands,
 } = filterSlice.actions;
 export default filterSlice.reducer; // Редюсер, отвечает за изменение состояния
