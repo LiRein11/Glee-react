@@ -1,17 +1,24 @@
 import { $authHost, $host } from '.';
-import { IProductItem, IProducts } from '../components/products.interface';
+import {
+  IBasketDevice,
+  IBrand,
+  IProductItem,
+  IProducts,
+  IProductsLength,
+  IType,
+} from '../components/products.interface';
 
 export const addDeviceToBasket = async (id: number) => {
-  const { data } = await $authHost.post('/api/basket', { id });
+  const { data } = await $authHost.post<IProductItem>('/api/basket', { id });
   return data;
 }; // server
 
 export const deleteDeviceFromBasket = async (id: number) => {
-  await $authHost.delete('api/basket/devices/' + id);
+  await $authHost.delete<IBasketDevice>('api/basket/devices/' + id);
 };
 
 export const getFavorites = async () => {
-  return $authHost.get('api/favorites/');
+  return $authHost.get<IProductItem[] & IProductsLength>('api/favorites/');
 };
 
 export const toggleFavorites = async (deviceId: number) => {
@@ -19,27 +26,29 @@ export const toggleFavorites = async (deviceId: number) => {
 };
 
 export const getTypes = async () => {
-  const { data } = await $host.get(`api/type`);
+  const { data } = await $host.get<IType[]>(`api/type`);
 
   return data;
 };
 
 export const getBrands = async () => {
-  const { data } = await $host.get(`api/brand`);
+  const { data } = await $host.get<IBrand[]>(`api/brand`);
 
   return data;
 };
 
-export const fetchDevices = async (brandId, typeId, page?, limit?) => {
+export const fetchDevices = async (brandId, typeId, page?, limit?, priceMin?, priceMax?) => {
   const { data } = await $host.get<IProducts>(`http://localhost:5000/api/device`, {
     params: {
       brandId,
       typeId,
       page,
-      limit
+      limit,
+      priceMin,
+      priceMax,
     },
   });
-  return data.rows;
+  return data;
 };
 
 export const fetchDevicesAll = async () => {

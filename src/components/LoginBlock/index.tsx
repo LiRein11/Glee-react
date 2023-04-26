@@ -5,19 +5,20 @@ import Footer from '../Footer';
 import Header from '../Header';
 
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { login, registration } from '../../http/userAPI';
+import { check, login, registration } from '../../http/userAPI';
 import '../../scss/login.scss';
+import { IDataToken } from '../products.interface';
 // import { useQuery } from 'react-query';
 
 const LoginBlock: React.FC = () => {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [email, setEmail] = React.useState<string>('');
+  const [password, setPassword] = React.useState<string>('');
 
   const location = useLocation();
   const isLogin = location.pathname === '/login';
   const navigate = useNavigate();
 
-  const token = localStorage.getItem('token');
+  const token: string | null = localStorage.getItem('token');
 
   // const pokemons = useStore((state) => state.pokemons);
   // const removePokemon = useStore((state) => state.removePokemon);
@@ -45,13 +46,13 @@ const LoginBlock: React.FC = () => {
 
   const info = () => {
     if (token) {
-      const data: any = jwt_decode(token);
-      // const dateNow = new Date()
-      // if(data.exp < dateNow.getTime()){
-      //   localStorage.removeItem('token')
-      //   navigate('/login')
-      // }
-      // console.log(data, dateNow.getTime());
+      const data: IDataToken = jwt_decode(token);
+      const dateNow = new Date();
+      if (dateNow.getTime() > data.exp * 1000) {
+        localStorage.removeItem('token');
+        navigate('/login');
+      }
+      console.log(data, dateNow.getTime());
       return (
         <>
           <div>Email: {data.email}</div>

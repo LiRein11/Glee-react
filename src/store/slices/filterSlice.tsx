@@ -21,11 +21,14 @@ export interface FilterSlice {
   activeDesignIndex: number;
   filterCategory: number;
   filterDesignCategory: number;
-  filterCategories: any;
-  filterDesignCategories: any;
-  filterBrands: any;
+  filterCategories: [];
+  filterDesignCategories: [];
+  filterBrands: [];
   activeIndexTypes: number | null;
   activeIndexBrands: number | null;
+  currentPriceMin: number;
+  currentPriceMax: number;
+  page:number
 }
 
 const initialState: FilterSlice = {
@@ -40,6 +43,9 @@ const initialState: FilterSlice = {
   filterBrands: [],
   activeIndexTypes: null,
   activeIndexBrands: null,
+  currentPriceMin: 0,
+  currentPriceMax: 360,
+  page:1
 };
 
 const filterSlice = createSlice({
@@ -58,23 +64,30 @@ const filterSlice = createSlice({
     setFilterDesignCategory(state, action: PayloadAction<number>) {
       state.filterDesignCategory = action.payload;
     },
-    toggleActiveIndexArrTypes(state, action: PayloadAction<number|null>) {
+    toggleActiveIndexArrTypes(state, action: PayloadAction<number | null>) {
       state.activeIndexTypes = action.payload;
-      // state.activeIndexArrTypes.includes(action.payload)
-      // ? (state.activeIndexArrTypes = state.activeIndexArrTypes.filter(
-      //       (el) => el !== action.payload,
-      //     ))
-      //   : state.activeIndexArrTypes.push(action.payload);
     },
-    toggleActiveIndexArrBrands(state, action: PayloadAction<number|null>) {
+    toggleActiveIndexArrBrands(state, action: PayloadAction<number | null>) {
       state.activeIndexBrands = action.payload;
-
-      // state.activeIndexBrands.includes(action.payload)
-      //   ? (state.activeIndexBrands = state.activeIndexBrands.filter(
-      //       (el) => el !== action.payload,
-      //     ))
-      //   : state.activeIndexBrands.push(action.payload);
     },
+    setCurrentPrice(state, action: PayloadAction<[number,number] | null>) {
+      state.currentPriceMin = action.payload? action.payload[0] : 0;
+      state.currentPriceMax = action.payload? action.payload[1] : 0;
+    },
+    setPage(state, action: PayloadAction<number>){
+      state.page = action.payload;
+    }
+    // setCurrentPrice(state, action: PayloadAction<number[]|null>){
+    //   if (
+    //     action.payload !== null &&
+    //     action.payload >= state.currentPriceMax &&
+    //     action.payload >= state.currentPriceMin
+    //   ) {
+    //     state.currentPriceMax = action.payload;
+    //   } else {
+    //     state.currentPriceMin = action.payload;
+    //   }
+    // }
   },
   extraReducers: {
     [fetchTypesThunk.pending]: (state) => {
@@ -112,5 +125,7 @@ export const {
   setFilterDesignCategory,
   toggleActiveIndexArrTypes,
   toggleActiveIndexArrBrands,
+  setCurrentPrice,
+  setPage,
 } = filterSlice.actions;
 export default filterSlice.reducer; // Редюсер, отвечает за изменение состояния

@@ -1,6 +1,6 @@
 import React from 'react';
-import CatalogBlockOne from '../components/CatalogBlockOne';
+import CatalogBlockOne from '../components/Catalogs/CatalogBlockOne';
 
-const CatalogOne = () => <CatalogBlockOne/>
+const CatalogOne = () => <CatalogBlockOne />;
 
 export default CatalogOne;

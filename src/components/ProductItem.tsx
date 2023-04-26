@@ -32,7 +32,11 @@ const ProductItem: FC<IBasketDevice> = (device) => {
     <div className='products-item'>
       <div className='products-item__img-box'>
         <div className='products-item__brand'>
-          <p>{loadingBrands || !brands[device.device.brandId - 1] ? '' : brands[device.device.brandId - 1].name}</p>
+          <p>
+            {loadingBrands || !brands
+              ? ''
+              : brands[device.device.brandId - 1].name}
+          </p>
         </div>
         {device.device.img === 'c533adb7-596c-4fb9-9ba1-ad2793ee757e.jpg' ? (
           <span className='products-item__centrr'>
@@ -90,7 +94,9 @@ const ProductItem: FC<IBasketDevice> = (device) => {
               onClick={() => clickDeleteDeviceFromBasket(device)}>
               -
             </button>
-            <button className='products-item__link'>+</button>
+            <button className='products-item__link' onClick={() => addToCart(device.device.id)}>
+              +
+            </button>
           </div>
         )}
       </div>

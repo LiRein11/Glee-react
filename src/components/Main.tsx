@@ -18,16 +18,23 @@ import {
   fetchTypesThunk,
 } from '../store/slices/filterSlice';
 import { fetchOneBasket } from '../store/slices/cartSlice';
-import { useFavorites } from './Favorites/useFavorites';
-import { fetchDevices } from '../http/deviceAPI';
+import { useFavorites } from '../hooks/useFavorites';
+import { fetchDevices, fetchDevicesAll } from '../http/deviceAPI';
 
 const Main = () => {
   const { filter, cart } = useSelector((state: RootState) => state);
   const dispatch = useDispatch<AppDispatch>();
   // console.log(cart.count, 'bbvsa')
-  console.log(filter);
-  const { data, isError } = useQuery(['devices', null, null], () => fetchDevices(null, null));
+  const limit: number = 14;
+
+  const { data, isError } = useQuery(['devices', null, null, 1, limit], () =>
+    fetchDevices(null, null, 1, limit),
+  );
+  const { data: allDevices } = useQuery('fetchAllDevices', fetchDevicesAll);
+
   const { favoritesDevices, isLoading, refetch } = useFavorites();
+
+  // console.log("alert('Hello world')")
 
   React.useEffect(() => {
     dispatch(fetchOneBasket());
@@ -36,6 +43,7 @@ const Main = () => {
   React.useEffect(() => {
     dispatch(fetchTypesThunk());
   }, []);
+
   // const addToCart= (obj)=>{
   //   dispatch(addProduct(obj))
   // }
@@ -159,10 +167,10 @@ const Main = () => {
           <div className='products__items'>
             {data
               ? filter.filterCategory === 0
-                ? data.map((obj) => (
+                ? data.rows.map((obj) => (
                     <>{obj.text !== 'Classic' ? <ProductItem device={obj} key={obj.id} /> : ''}</>
                   ))
-                : data.map((obj) =>
+                : data.rows.map((obj) =>
                     obj.typeId === filter.filterCategory && obj.text !== 'Classic' ? (
                       <ProductItem device={obj} key={obj.id} />
                     ) : (
@@ -227,12 +235,12 @@ const Main = () => {
             ))}
           </ul>
           <div className='design__items'>
-            {data
+            {allDevices
               ? filter.filterDesignCategory === 0
-                ? data.map((obj) => (
+                ? allDevices.map((obj) => (
                     <>{obj.text === 'Classic' ? <DesignItem item={obj} key={obj.id} /> : ''}</>
                   ))
-                : data.map((obj) =>
+                : allDevices.map((obj) =>
                     obj.typeId === filter.filterDesignCategory && obj.text === 'Classic' ? (
                       <DesignItem item={obj} key={obj.id} />
                     ) : (

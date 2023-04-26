@@ -83,6 +83,42 @@
   }
 }
 
+.css-1gv0vcd-MuiSlider-track{
+  top: 15px !important;
+  height: 4px !important;
+  background-color: #c2d2db !important;
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+.css-eg0mwd-MuiSlider-thumb{
+  top: 15px !important;
+  width: 15px !important;
+  height: 15px !important;
+  background-color: $accent !important;
+  border-radius: 0 !important;
+}
+
+.css-eg0mwd-MuiSlider-thumb:hover{
+  box-shadow: 0 0 0 0 !important;
+}
+
+.css-14pt78w-MuiSlider-rail{
+  top: 15px !important;
+  height: 2px !important;
+  background-color: #c2d2db !important;
+  border-radius: 0 !important;
+  opacity: 1 !important;
+}
+
+.Mui-active{
+  box-shadow: 0 0 0 0 !important;
+}
+
+.Mui-focusVisible{
+   box-shadow: 0 0 0 0 !important;
+}
+
 .irs--flat .irs-line {
   top: 7px;
   height: 2px;

@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
-import { useFavorites } from './useFavorites';
+import { useFavorites } from '../../hooks/useFavorites';
 import { toggleFavorites } from '../../http/deviceAPI';
 import { IBasketDevice, IProductItem } from '../products.interface';
 
-const ButtonFavorites: FC<{ deviceBasket: IBasketDevice }> = ({deviceBasket}) => {
+const ButtonFavorites: FC<{ deviceBasket: IBasketDevice }> = ({ deviceBasket }) => {
   const [isToggled, setIsToggled] = React.useState(false);
 
   const { favoritesDevices, isLoading, refetch } = useFavorites();
@@ -25,9 +25,9 @@ const ButtonFavorites: FC<{ deviceBasket: IBasketDevice }> = ({deviceBasket}) =>
     {
       onSuccess: () => {
         setIsToggled(!isToggled);
-      setTimeout(() => {
-        queryClient.invalidateQueries(); // перезапускаем все запросы в приложении
-      }, 80);
+        setTimeout(() => {
+          queryClient.invalidateQueries(); // перезапускаем все запросы в приложении
+        }, 80);
         // обновляем кэш данных для фаворитов, чтобы React Query автоматически обновил данные на странице
       },
       onError: (error) => {

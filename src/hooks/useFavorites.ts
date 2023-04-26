@@ -1,12 +1,12 @@
 import { useQuery } from 'react-query';
-import { getFavorites } from '../../http/deviceAPI';
+import { getFavorites } from '../http/deviceAPI';
 
-export const useFavorites = (tt?:any) => {
+export const useFavorites = () => {
   const {
     isLoading,
     data: favoritesDevices,
     refetch,
-  } = useQuery(['favorites devices', tt], () => getFavorites(), {
+  } = useQuery(['favorites devices'], () => getFavorites(), {
     select: ({ data }) => data,
     // cacheTime: 0,
   });

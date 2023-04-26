@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { RootState } from '../store';
 import { useSelector } from 'react-redux';
-import { useFavorites } from './Favorites/useFavorites';
+import { useFavorites } from '../hooks/useFavorites';
 
 const Header: FC = () => {
   const cart = useSelector((state: RootState) => state.cart);
@@ -98,7 +98,9 @@ const Header: FC = () => {
             <div className='user-nav__box'>
               <NavLink className='user-nav__heart' to='/favorites'>
                 <img className='user-nav__heart-img' src='images/icons/heart.svg' alt='heart' />
-                <span className='user-nav__num'>{isLoading ? '' : favoritesDevices?.length}</span>
+                <span className='user-nav__num'>
+                  {favoritesDevices ? favoritesDevices?.length : 0}
+                </span>
               </NavLink>
               <NavLink className='user-nav__cart' to='/cart'>
                 <img className='user-nav__cart-img' src='images/icons/cart.svg' alt='cart' />
