@@ -20,8 +20,7 @@ import {
 
 import { IBrand, IType } from '../../products.interface';
 import CatalogLeftBar from '../CatalogLeftBar';
-
-
+import CatalogContent from '../CatalogContent';
 
 const CatalogBlockOne = () => {
   const filter = useSelector((state: RootState) => state.filter);
@@ -118,7 +117,14 @@ const CatalogBlockOne = () => {
           </div>
         </section>
 
-        <CatalogLeftBar />
+        <section className='catalog'>
+          <div className='container'>
+            <div className='catalog__inner'>
+              <CatalogLeftBar />
+              <CatalogContent devices={devices} limit={9} />
+            </div>
+          </div>
+        </section>
 
         <section className='partners-section'>
           <div className='container'>

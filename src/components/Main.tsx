@@ -24,7 +24,7 @@ import { fetchDevices, fetchDevicesAll } from '../http/deviceAPI';
 const Main = () => {
   const { filter, cart } = useSelector((state: RootState) => state);
   const dispatch = useDispatch<AppDispatch>();
-  // console.log(cart.count, 'bbvsa')
+
   const limit: number = 14;
 
   const { data, isError } = useQuery(['devices', null, null, 1, limit], () =>
@@ -34,8 +34,6 @@ const Main = () => {
 
   const { favoritesDevices, isLoading, refetch } = useFavorites();
 
-  // console.log("alert('Hello world')")
-
   React.useEffect(() => {
     dispatch(fetchOneBasket());
   }, [favoritesDevices]);
@@ -43,10 +41,6 @@ const Main = () => {
   React.useEffect(() => {
     dispatch(fetchTypesThunk());
   }, []);
-
-  // const addToCart= (obj)=>{
-  //   dispatch(addProduct(obj))
-  // }
 
   const onClickFilter = (index: number) => {
     dispatch(setActiveIndex(index));
@@ -61,46 +55,7 @@ const Main = () => {
   return (
     <main className='main'>
       <section className='top-slider'>
-        {/* <div className="container-large"> */}
         <Slider />
-        {/* <div className="top-slider__item">
-              <div className="top-slider__content">
-                <h2 className="top-slider__title">SMART AND TRENDY</h2>
-                <p className="top-slider__text">
-                  Dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                </p>
-                <a className="top-slider__btn" href="#">
-                  Shop Now
-                </a>
-              </div>
-              <img className="top-slider__img" src="images/slider/1.png" alt="slider img" />
-            </div>
-            <div className="top-slider__item">
-              <div className="top-slider__content">
-                <h3 className="top-slider__title">SMART AND TRENDY</h3>
-                <p className="top-slider__text">
-                  Dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt 444444444444
-                </p>
-                <a className="top-slider__btn" href="#">
-                  Shop Now
-                </a>
-              </div>
-              <img className="top-slider__img" src="images/slider/1.png" alt="slider img" />
-            </div>
-            <div className="top-slider__item">
-              <div className="top-slider__content">
-                <h3 className="top-slider__title">SMART AND TRENDY</h3>
-                <p className="top-slider__text">
-                  Dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                </p>
-                <a className="top-slider__btn" href="#">
-                  Shop Now
-                </a>
-              </div>
-              <img className="top-slider__img" src="images/slider/1.png" alt="slider img" />
-            </div> */}
-        {/* </Slider> */}
-        {/* </div> */}
         <div className='guarantees'>
           <div className='guarantees__items'>
             <div className='guarantees__item'>

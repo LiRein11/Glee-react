@@ -56,6 +56,21 @@ export const fetchDevicesAll = async () => {
   return data.rows;
 };
 
+export const fetchOneDevice = async (id) => {
+  const { data } = await $host.get('api/device/' + id);
+  return data;
+};
+
+export const addRating = async (body: { rate: number; deviceId: number }) => {
+  const { data } = await $authHost.put('api/rating/', body);
+  return data;
+};
+
+export const checkRating = async (body: {deviceId:number}) => {
+  const { data } = await $authHost.post('api/rating/check', body);
+  return data;
+};
+
 // export const fetchProducts = async (brandId:number|string='', typeId:number|string='') => {
 //   if (brandId || typeId) {
 //     const { data } = await $host.get<IProducts>(

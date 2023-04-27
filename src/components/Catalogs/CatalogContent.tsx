@@ -4,6 +4,7 @@ import ProductItem from '../ProductItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
 import { setPage } from '../../store/slices/filterSlice';
+import ProductItemLine from '../ProductItemLine';
 
 const CatalogContent: FC<{ devices: IProducts | undefined; limit: number }> = ({
   devices,
@@ -30,20 +31,28 @@ const CatalogContent: FC<{ devices: IProducts | undefined; limit: number }> = ({
 
   return (
     <div className='catalog-content'>
-      <div className='catalog-content__items'>
-        {devices?.rows.map((el) =>
-          el.price > filter.currentPriceMin && el.price < filter.currentPriceMax ? (
-            <ProductItem device={el} key={el.id} />
-          ) : (
-            ''
-          ),
-        )}
+      <div className={limit === 9 ? 'catalog-content__items' : 'catalog-content__items-line'}>
+        {limit === 9
+          ? devices?.rows.map((el) =>
+              el.price > filter.currentPriceMin && el.price < filter.currentPriceMax ? (
+                <ProductItem device={el} key={el.id} />
+              ) : (
+                ''
+              ),
+            )
+          : devices?.rows.map((el) =>
+              el.price > filter.currentPriceMin && el.price < filter.currentPriceMax ? (
+                <ProductItemLine device={el} key={el.id} />
+              ) : (
+                ''
+              ),
+            )}
       </div>
 
       {devices?.count === 0 ? (
         <div>Нет товаров</div>
       ) : (
-        <div className='pagination'>
+        <div className={limit === 9 ?'pagination' : 'pagination pagination-line'}>
           <button
             className='pagination__prev pagination__arrow'
             onClick={
