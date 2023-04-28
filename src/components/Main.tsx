@@ -25,7 +25,7 @@ const Main = () => {
   const { filter, cart } = useSelector((state: RootState) => state);
   const dispatch = useDispatch<AppDispatch>();
 
-  const limit: number = 14;
+  const limit: number = 13;
 
   const { data, isError } = useQuery(['devices', null, null, 1, limit], () =>
     fetchDevices(null, null, 1, limit),
@@ -61,7 +61,7 @@ const Main = () => {
             <div className='guarantees__item'>
               <img
                 className='guarantees__item-img'
-                src='images/slider/guarantee-1.png'
+                src='/images/slider/guarantee-1.png'
                 alt='guarantee img'
               />
               <div className='guarantees__item-box'>
@@ -75,7 +75,7 @@ const Main = () => {
             <div className='guarantees__item'>
               <img
                 className='guarantees__item-img'
-                src='images/slider/guarantee-2.png'
+                src='/images/slider/guarantee-2.png'
                 alt='guarantee img'
               />
               <div className='guarantees__item-box'>
@@ -86,7 +86,7 @@ const Main = () => {
             <div className='guarantees__item guarantees__item-none'>
               <img
                 className='guarantees__item-img'
-                src='images/slider/guarantee-3.png'
+                src='/images/slider/guarantee-3.png'
                 alt='guarantee img'
               />
               <div className='guarantees__item-box'>
@@ -142,7 +142,7 @@ const Main = () => {
             <div className='categories-info__item categories-info__item-one'>
               <img
                 className='categories-info__item-images categories-info__item-images--one'
-                src='images/lamp-one.png'
+                src='/images/lamp-one.png'
                 alt='lamp'
               />
               <h4 className='categories-info__item-title'>Mirum Notare Tellus</h4>
@@ -154,7 +154,7 @@ const Main = () => {
             <div className='categories-info__item categories-info__item-two'>
               <img
                 className='categories-info__item-images categories-info__item-images--two'
-                src='images/lamp-two.png'
+                src='/images/lamp-two.png'
                 alt='lamp'
               />
               <h4 className='categories-info__item-title'>
@@ -212,7 +212,7 @@ const Main = () => {
             className='video__play'
             data-fancybox
             href='https://www.youtube.com/watch?v=AeMQq7OhbO8&ab_channel=%D0%94%D0%B8%D0%B2%D0%B0%D0%BD%D1%8B%D0%B4%D0%BB%D1%8F%D0%BD%D0%B8%D1%80%D0%B2%D0%B0%D0%BD%D1%8B-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%BD%D0%B5%D1%82%D0%BC%D0%B0%D0%B3%D0%B0%D0%B7%D0%B8%D0%BD%D0%B4%D0%B8%D0%B2%D0%B0%D0%BD%D0%BE%D0%B2No1'>
-            <img className='video__play-btn' src='images/icons/play.svg' alt='play btn' />
+            <img className='video__play-btn' src='/images/icons/play.svg' alt='play btn' />
           </a>
         </div>
       </section>
@@ -238,7 +238,7 @@ const Main = () => {
           <div className='blog__items'>
             <div className='blog__item'>
               <a className='blog__item-imglink' href=''>
-                <img src='images/blog/1.png' alt='img blog' />
+                <img src='/images/blog/1.png' alt='img blog' />
               </a>
               <div className='blog__item-box'>
                 <span className='blog__item-news'>NEWS</span>
@@ -256,7 +256,7 @@ const Main = () => {
           <div className='blog__items'>
             <div className='blog__item'>
               <a className='blog__item-imglink' href=''>
-                <img src='images/blog/2.png' alt='img blog' />
+                <img src='/images/blog/2.png' alt='img blog' />
               </a>
               <div className='blog__item-box'>
                 <span className='blog__item-news'>NEWS</span>
@@ -274,7 +274,7 @@ const Main = () => {
           <div className='blog__items'>
             <div className='blog__item'>
               <a className='blog__item-imglink' href=''>
-                <img src='images/blog/3.png' alt='img blog' />
+                <img src='/images/blog/3.png' alt='img blog' />
               </a>
               <div className='blog__item-box'>
                 <span className='blog__item-news'>NEWS</span>
@@ -291,11 +291,11 @@ const Main = () => {
           </div>
           <div className='partners'>
             <div className='partners__images'>
-              <img src='images/partners/1.png' alt='partners img' />
-              <img src='images/partners/2.png' alt='partners img' />
-              <img src='images/partners/3.png' alt='partners img' />
-              <img src='images/partners/4.png' alt='partners img' />
-              <img src='images/partners/5.png' alt='partners img' />
+              <img src='/images/partners/1.png' alt='partners img' />
+              <img src='/images/partners/2.png' alt='partners img' />
+              <img src='/images/partners/3.png' alt='partners img' />
+              <img src='/images/partners/4.png' alt='partners img' />
+              <img src='/images/partners/5.png' alt='partners img' />
             </div>
           </div>
         </div>

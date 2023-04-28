@@ -30,7 +30,7 @@ const Header: FC = () => {
       <div className='container-large'>
         <div className='header__inner'>
           <Link className='logo' to='/'>
-            <img className='logo__img' src='images/logo.png' alt='logo' />
+            <img className='logo__img' src='/images/logo.png' alt='logo' />
           </Link>
           <nav className='menu'>
             <button className='menu__btn'>
@@ -64,7 +64,7 @@ const Header: FC = () => {
                     <NavLink className='menu__list-link' to='/catalogTwo'>
                       CatalogTwo
                     </NavLink>
-                    <NavLink className='menu__list-link' to='/productDetails'>
+                    <NavLink className='menu__list-link' to='/productDetails/1'>
                       ProductDetails
                     </NavLink>
                     <NavLink className='menu__list-link' to='/terms'>
@@ -93,22 +93,22 @@ const Header: FC = () => {
           </nav>
           <div className='user-nav'>
             <a className='user-nav__search' href='#'>
-              <img className='user-nav__search-img' src='images/icons/search.svg' alt='search' />
+              <img className='user-nav__search-img' src='/images/icons/search.svg' alt='search' />
             </a>
             <div className='user-nav__box'>
               <NavLink className='user-nav__heart' to='/favorites'>
-                <img className='user-nav__heart-img' src='images/icons/heart.svg' alt='heart' />
+                <img className='user-nav__heart-img' src='/images/icons/heart.svg' alt='heart' />
                 <span className='user-nav__num'>
                   {favoritesDevices ? favoritesDevices?.length : 0}
                 </span>
               </NavLink>
               <NavLink className='user-nav__cart' to='/cart'>
-                <img className='user-nav__cart-img' src='images/icons/cart.svg' alt='cart' />
+                <img className='user-nav__cart-img' src='/images/icons/cart.svg' alt='cart' />
                 <span className='user-nav__num'>{cart.count}</span>
               </NavLink>
             </div>
             <button className='user-nav__btn' onClick={click}>
-              <img className='user-nav__btn-img' src='images/navuser-btn.png' alt='btn' />
+              <img className='user-nav__btn-img' src='/images/navuser-btn.png' alt='btn' />
             </button>
           </div>
         </div>

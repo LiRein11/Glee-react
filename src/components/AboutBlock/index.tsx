@@ -32,12 +32,12 @@ const AboutBlock = () => {
         <section className='about-top'>
           <div className='container'>
             <div className='about-top__inner'>
-              <img className='about-top__img' src='images/about/1.jpg' alt='about img' />
+              <img className='about-top__img' src='/images/about/1.jpg' alt='about img' />
               <div className='about-top__content'>
                 <div className='about-top__content-box'>
                   <img
                     className='about-top__content-img'
-                    src='images/about/2.jpg'
+                    src='/images/about/2.jpg'
                     alt='about num img'
                   />
                   <div className='about-top__content-info'>
@@ -134,28 +134,28 @@ const AboutBlock = () => {
             <div className='info__items'>
               <div className='info__item'>
                 <div className='info__box-img'>
-                  <img src='images/about/info/1.png' alt='info img' />
+                  <img src='/images/about/info/1.png' alt='info img' />
                 </div>
                 <h4 className='info__title'>99%</h4>
                 <p className='info__text'>Satisﬁed Clients Rate</p>
               </div>
               <div className='info__item'>
                 <div className='info__box-img'>
-                  <img src='images/about/info/2.png' alt='info img' />
+                  <img src='/images/about/info/2.png' alt='info img' />
                 </div>
                 <h4 className='info__title'>5020+</h4>
                 <p className='info__text'>Products Delivered</p>
               </div>
               <div className='info__item'>
                 <div className='info__box-img'>
-                  <img src='images/about/info/3.png' alt='info img' />
+                  <img src='/images/about/info/3.png' alt='info img' />
                 </div>
                 <h4 className='info__title'>23hr</h4>
                 <p className='info__text'>Daily Working Time</p>
               </div>
               <div className='info__item'>
                 <div className='info__box-img'>
-                  <img src='images/about/info/4.png' alt='info img' />
+                  <img src='/images/about/info/4.png' alt='info img' />
                 </div>
                 <h4 className='info__title'>140+</h4>
                 <p className='info__text'>Brands in Store</p>
@@ -182,7 +182,7 @@ const AboutBlock = () => {
               <div className='team__content'>
                 <div className='team__box-img'>
                   <a className='team__img-link' href='#'>
-                    <img src='images/about/team/1.jpg' alt='team img' />
+                    <img src='/images/about/team/1.jpg' alt='team img' />
                   </a>
                   <div className='team__content-box'>
                     <div className='team__info-content'>
@@ -233,7 +233,7 @@ const AboutBlock = () => {
                 </div>
                 <div className='team__box-img'>
                   <a className='team__img-link' href='#'>
-                    <img src='images/about/team/2.jpg' alt='team img' />
+                    <img src='/images/about/team/2.jpg' alt='team img' />
                   </a>
                   <div className='team__content-box'>
                     <div className='team__info-content'>
@@ -284,7 +284,7 @@ const AboutBlock = () => {
                 </div>
                 <div className='team__box-img'>
                   <a className='team__img-link' href='#'>
-                    <img src='images/about/team/3.jpg' alt='team img' />
+                    <img src='/images/about/team/3.jpg' alt='team img' />
                   </a>
                   <div className='team__content-box'>
                     <div className='team__info-content'>
@@ -335,7 +335,7 @@ const AboutBlock = () => {
                 </div>
                 <div className='team__box-img'>
                   <a className='team__img-link' href='#'>
-                    <img src='images/about/team/4.jpg' alt='team img' />
+                    <img src='/images/about/team/4.jpg' alt='team img' />
                   </a>
                   <div className='team__content-box'>
                     <div className='team__info-content'>
@@ -411,7 +411,7 @@ const AboutBlock = () => {
             <div className='blog__items'>
               <div className='blog__item'>
                 <a className='blog__item-imglink' href=''>
-                  <img src='images/blog/1.png' alt='img blog' />
+                  <img src='/images/blog/1.png' alt='img blog' />
                 </a>
                 <div className='blog__item-box'>
                   <span className='blog__item-news'>NEWS</span>
@@ -429,7 +429,7 @@ const AboutBlock = () => {
             <div className='blog__items'>
               <div className='blog__item'>
                 <a className='blog__item-imglink' href=''>
-                  <img src='images/blog/2.png' alt='img blog' />
+                  <img src='/images/blog/2.png' alt='img blog' />
                 </a>
                 <div className='blog__item-box'>
                   <span className='blog__item-news'>NEWS</span>
@@ -447,7 +447,7 @@ const AboutBlock = () => {
             <div className='blog__items'>
               <div className='blog__item'>
                 <a className='blog__item-imglink' href=''>
-                  <img src='images/blog/3.png' alt='img blog' />
+                  <img src='/images/blog/3.png' alt='img blog' />
                 </a>
                 <div className='blog__item-box'>
                   <span className='blog__item-news'>NEWS</span>
@@ -464,11 +464,11 @@ const AboutBlock = () => {
             </div>
             <div className='partners'>
               <div className='partners__images'>
-                <img src='images/partners/1.png' alt='partners img' />
-                <img src='images/partners/2.png' alt='partners img' />
-                <img src='images/partners/3.png' alt='partners img' />
-                <img src='images/partners/4.png' alt='partners img' />
-                <img src='images/partners/5.png' alt='partners img' />
+                <img src='/images/partners/1.png' alt='partners img' />
+                <img src='/images/partners/2.png' alt='partners img' />
+                <img src='/images/partners/3.png' alt='partners img' />
+                <img src='/images/partners/4.png' alt='partners img' />
+                <img src='/images/partners/5.png' alt='partners img' />
               </div>
             </div>
           </div>

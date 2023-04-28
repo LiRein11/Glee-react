@@ -56,13 +56,13 @@ export const fetchDevicesAll = async () => {
   return data.rows;
 };
 
-export const fetchOneDevice = async (id) => {
+export const fetchOneDevice = async (id:number) => {
   const { data } = await $host.get('api/device/' + id);
   return data;
 };
 
 export const addRating = async (body: { rate: number; deviceId: number }) => {
-  const { data } = await $authHost.put('api/rating/', body);
+  const { data } = await $authHost.post('api/rating/', body);
   return data;
 };
 

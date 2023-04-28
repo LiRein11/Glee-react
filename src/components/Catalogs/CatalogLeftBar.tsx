@@ -168,7 +168,7 @@ const CatalogLeftBar: FC = () => {
           <div className='filter-products__content'>
             <div className='filter-products__item'>
               <a className='filter-products__img' href='#'>
-                <img src='images/catalog/products/1.jpg' alt='products img' />
+                <img src='/images/catalog/products/1.jpg' alt='products img' />
               </a>
               <div className='filter-products__box'>
                 <a className='filter-products__title' href='#'>
@@ -180,7 +180,7 @@ const CatalogLeftBar: FC = () => {
             </div>
             <div className='filter-products__item'>
               <a className='filter-products__img' href='#'>
-                <img src='images/catalog/products/2.jpg' alt='products img' />
+                <img src='/images/catalog/products/2.jpg' alt='products img' />
               </a>
               <div className='filter-products__box'>
                 <a className='filter-products__title' href='#'>
@@ -192,7 +192,7 @@ const CatalogLeftBar: FC = () => {
             </div>
             <div className='filter-products__item'>
               <a className='filter-products__img' href='#'>
-                <img src='images/catalog/products/3.jpg' alt='products img' />
+                <img src='/images/catalog/products/3.jpg' alt='products img' />
               </a>
               <div className='filter-products__box'>
                 <a className='filter-products__title' href='#'>
@@ -205,7 +205,6 @@ const CatalogLeftBar: FC = () => {
           </div>
         </div>
       </div>
-      
     </>
   );
 };

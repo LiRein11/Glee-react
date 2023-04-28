@@ -7,18 +7,21 @@ import { AppDispatch } from '../store';
 import ButtonFavorites from './Favorites/ButtonFavorites';
 import jwt_decode from 'jwt-decode';
 import RatingStars from './Ratings';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 
 const ProductItemLine: FC<{ device: IProductItem }> = ({ device }) => {
   const dispatch = useDispatch<AppDispatch>();
   const [resRate, setResRate] = React.useState(device.rating);
-  console.log(device);
-  // const [isAccessRating, setIsAccessRating] = React.useState(false);
+  // console.log(device);
+  const [isAccessRating, setIsAccessRating] = React.useState(false);
   const token: string | null = localStorage.getItem('token');
 
-  const { data, isError, refetch } = useQuery(['oneDevice', device.id], () =>
-    fetchOneDevice(device.id),
-  );
+  React.useEffect(() => {
+    if (token) {
+      checkRating({ deviceId: device.id }).then((res) => setIsAccessRating(res.allow));
+    }
+    fetchOneDevice(device.id);
+  }, [resRate]);
 
   const addToCart = async (id: number) => {
     await addDeviceToBasket(id);
@@ -26,15 +29,18 @@ const ProductItemLine: FC<{ device: IProductItem }> = ({ device }) => {
     alert('Товар добавлен в корзину!');
   };
 
-  const clickRating = (rate: number) => {
-    // addRating({ rate, deviceId: device.id }).then((res) => {
-    //   setResRate(res);
-    // });
-  };
+  const handleClick = async (nextValue: number) => {
+    try {
+      await addRating({ rate: nextValue, deviceId: device.id });
 
-  React.useEffect(() => {
-    // refetch();
-  }, [device.rating, resRate, clickRating]);
+      setResRate(nextValue);
+      // Здесь выполняется проверка рейтинга после обновления
+      checkRating({ deviceId: device.id }).then((res) => setIsAccessRating(res.allow));
+      alert('Спасибо за оценку');
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className='catalog-content__item'>
@@ -47,10 +53,10 @@ const ProductItemLine: FC<{ device: IProductItem }> = ({ device }) => {
         </a>
 
         <RatingStars
-          clickRating={clickRating}
+          clickRating={handleClick}
           ratingVal={device.rating}
           isAuth={token ? true : false}
-          // isAccessRating={isAccessRating}
+          isAccessRating={isAccessRating}
         />
 
         <span className='catalog-content__item-price'>{device.price}$</span>

@@ -83,7 +83,7 @@
   }
 }
 
-.css-1gv0vcd-MuiSlider-track{
+.css-1gv0vcd-MuiSlider-track {
   top: 15px !important;
   height: 4px !important;
   background-color: #c2d2db !important;
@@ -91,7 +91,7 @@
   border: none !important;
 }
 
-.css-eg0mwd-MuiSlider-thumb{
+.css-eg0mwd-MuiSlider-thumb {
   top: 15px !important;
   width: 15px !important;
   height: 15px !important;
@@ -99,11 +99,11 @@
   border-radius: 0 !important;
 }
 
-.css-eg0mwd-MuiSlider-thumb:hover{
+.css-eg0mwd-MuiSlider-thumb:hover {
   box-shadow: 0 0 0 0 !important;
 }
 
-.css-14pt78w-MuiSlider-rail{
+.css-14pt78w-MuiSlider-rail {
   top: 15px !important;
   height: 2px !important;
   background-color: #c2d2db !important;
@@ -111,12 +111,12 @@
   opacity: 1 !important;
 }
 
-.Mui-active{
+.Mui-active {
   box-shadow: 0 0 0 0 !important;
 }
 
-.Mui-focusVisible{
-   box-shadow: 0 0 0 0 !important;
+.Mui-focusVisible {
+  box-shadow: 0 0 0 0 !important;
 }
 
 .irs--flat .irs-line {
@@ -284,7 +284,7 @@
     width: 50px;
     border: none;
     padding: 0;
-    margin-right: 8px; 
+    margin-right: 8px;
     background-color: #fff;
     overflow: hidden;
     svg {
@@ -348,7 +348,6 @@
   &__slide {
     margin-right: 70px;
   }
-  
   &__content {
     width: 540px;
   }
@@ -369,11 +368,41 @@
     display: block;
     padding: 30px 0;
   }
+  &__form {
+    display: flex;
+    margin-bottom: 50px;
+  }
   &__text {
     color: #243f4d;
     width: 540px;
     margin-bottom: 30px;
   }
+  &__num {
+    width: 50px;
+    border: 1px solid #a3bbc8;
+    text-align: center;
+    color: #333;
+    padding-top: 10px;
+  }
+  &__btn-left {
+    content: '';
+    border: 1px solid #a3bbc8;
+    height: 50px;
+    width: 50px;
+    color: #333;
+    background-color: #fff;
+    border-right: none;
+  }
+  &__btn-right {
+    content: '';
+    border: 1px solid #a3bbc8;
+    height: 50px;
+    color: #333;
+    width: 50px;
+    background-color: #fff;
+    border-left: none;
+  }
+
   .star-line {
     display: block;
     padding: 0;
@@ -392,7 +421,6 @@
     font-size: 15px;
     padding: 0;
     border-radius: 5px;
-    margin-bottom: 50px;
     margin-left: 15px;
   }
   &__info {
@@ -510,8 +538,7 @@
     padding-top: 60px;
     img {
       height: 405px;
-      width: 228px;
-      object-fit: cover;
+      object-fit: none; // cover
     }
   }
 }

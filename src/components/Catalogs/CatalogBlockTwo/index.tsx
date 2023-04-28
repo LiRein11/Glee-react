@@ -129,27 +129,27 @@ const CatalogBlockTwo = () => {
               <div className='partners-section__images'>
                 <img
                   className='partners-section__images-img'
-                  src='images/partners/1.png'
+                  src='/images/partners/1.png'
                   alt='partners img'
                 />
                 <img
                   className='partners-section__images-img'
-                  src='images/partners/2.png'
+                  src='/images/partners/2.png'
                   alt='partners img'
                 />
                 <img
                   className='partners-section__images-img'
-                  src='images/partners/3.png'
+                  src='/images/partners/3.png'
                   alt='partners img'
                 />
                 <img
                   className='partners-section__images-img'
-                  src='images/partners/4.png'
+                  src='/images/partners/4.png'
                   alt='partners img'
                 />
                 <img
                   className='partners-section__images-img'
-                  src='images/partners/5.png'
+                  src='/images/partners/5.png'
                   alt='partners img'
                 />
               </div>

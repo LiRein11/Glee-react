@@ -49,7 +49,7 @@ export interface IRating {
   clickRating: Function;
   ratingVal: number;
   isAuth: boolean;
-  // isAccessRating: boolean;
+  isAccessRating: boolean;
 }
 
 // export interface IProducts {

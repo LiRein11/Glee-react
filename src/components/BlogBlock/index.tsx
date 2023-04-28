@@ -35,7 +35,7 @@ const BlogBlock = () => {
                       <a href='#'>
                         <img
                           className='blog-item__img'
-                          src='images/blog/blog-page/1.jpg'
+                          src='/images/blog/blog-page/1.jpg'
                           alt='blog img'
                         />
                       </a>
@@ -63,7 +63,7 @@ const BlogBlock = () => {
                       <a href='#'>
                         <img
                           className='blog-item__img'
-                          src='images/blog/blog-page/2.jpg'
+                          src='/images/blog/blog-page/2.jpg'
                           alt='blog img'
                         />
                       </a>
@@ -91,7 +91,7 @@ const BlogBlock = () => {
                       <a href='#'>
                         <img
                           className='blog-item__img'
-                          src='images/blog/blog-page/3.jpg'
+                          src='/images/blog/blog-page/3.jpg'
                           alt='blog img'
                         />
                       </a>
@@ -119,7 +119,7 @@ const BlogBlock = () => {
                       <a href='#'>
                         <img
                           className='blog-item__img'
-                          src='images/blog/blog-page/4.jpg'
+                          src='/images/blog/blog-page/4.jpg'
                           alt='blog img'
                         />
                       </a>
@@ -221,7 +221,7 @@ const BlogBlock = () => {
                     <div className='filter-posts__item'>
                       <div className='filter-posts__content'>
                         <a className='filter-posts__img' href='#'>
-                          <img src='images/blog/posts/1.jpg' alt='img posts' />
+                          <img src='/images/blog/posts/1.jpg' alt='img posts' />
                         </a>
                         <div className='filter-posts__box'>
                           <a className='filter-posts__title' href='#'>
@@ -234,7 +234,7 @@ const BlogBlock = () => {
                     <div className='filter-posts__item'>
                       <div className='filter-posts__content'>
                         <a className='filter-posts__img' href='#'>
-                          <img src='images/blog/posts/2.jpg' alt='img posts' />
+                          <img src='/images/blog/posts/2.jpg' alt='img posts' />
                         </a>
                         <div className='filter-posts__box'>
                           <a className='filter-posts__title' href='#'>
@@ -247,7 +247,7 @@ const BlogBlock = () => {
                     <div className='filter-posts__item'>
                       <div className='filter-posts__content'>
                         <a className='filter-posts__img' href='#'>
-                          <img src='images/blog/posts/3.jpg' alt='img posts' />
+                          <img src='/images/blog/posts/3.jpg' alt='img posts' />
                         </a>
                         <div className='filter-posts__box'>
                           <a className='filter-posts__title' href='#'>
@@ -260,7 +260,7 @@ const BlogBlock = () => {
                     <div className='filter-posts__item'>
                       <div className='filter-posts__content'>
                         <a className='filter-posts__img' href='#'>
-                          <img src='images/blog/posts/4.jpg' alt='img posts' />
+                          <img src='/images/blog/posts/4.jpg' alt='img posts' />
                         </a>
                         <div className='filter-posts__box'>
                           <a className='filter-posts__title' href='#'>
@@ -307,27 +307,27 @@ const BlogBlock = () => {
               <div className='partners-section__images'>
                 <img
                   className='partners-section__images-img'
-                  src='images/partners/1.png'
+                  src='/images/partners/1.png'
                   alt='partners img'
                 />
                 <img
                   className='partners-section__images-img'
-                  src='images/partners/2.png'
+                  src='/images/partners/2.png'
                   alt='partners img'
                 />
                 <img
                   className='partners-section__images-img'
-                  src='images/partners/3.png'
+                  src='/images/partners/3.png'
                   alt='partners img'
                 />
                 <img
                   className='partners-section__images-img'
-                  src='images/partners/4.png'
+                  src='/images/partners/4.png'
                   alt='partners img'
                 />
                 <img
                   className='partners-section__images-img'
-                  src='images/partners/5.png'
+                  src='/images/partners/5.png'
                   alt='partners img'
                 />
               </div>

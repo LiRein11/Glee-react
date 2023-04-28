@@ -2,10 +2,10 @@ import { Rating } from '@mui/material';
 import React, { FC } from 'react';
 import { IRating } from './products.interface';
 
-const RatingStars: FC<IRating> = ({ clickRating, isAuth = false, ratingVal }) => {
-  React.useEffect(() => {}, [clickRating, ratingVal]);
+const RatingStars: FC<IRating> = ({ clickRating, isAuth, ratingVal, isAccessRating }) => {
+  // React.useEffect(() => {}, [clickRating, ratingVal]);
 
-  if (isAuth) {
+  if (isAuth && isAccessRating) {
     return (
       <Rating
         name='simple-controlled'

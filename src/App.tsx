@@ -34,7 +34,7 @@ const App: FC = () => {
           <Route path='/login' element={<Login />} />
           <Route path='/registration' element={<Login />} />
           <Route path='/account' element={<Login />} />
-          <Route path='/productDetails' element={<ProductDetails />} />
+          <Route path='/productDetails/:id/' element={<ProductDetails />} />
           <Route path='/terms' element={<Terms />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/favorites' element={<Favorites />} />

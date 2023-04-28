@@ -168,7 +168,7 @@ const ContactBlock = () => {
             <div className='blog__items'>
               <div className='blog__item'>
                 <a className='blog__item-imglink' href=''>
-                  <img src='images/blog/1.png' alt='img blog' />
+                  <img src='/images/blog/1.png' alt='img blog' />
                 </a>
                 <div className='blog__item-box'>
                   <span className='blog__item-news'>NEWS</span>
@@ -186,7 +186,7 @@ const ContactBlock = () => {
             <div className='blog__items'>
               <div className='blog__item'>
                 <a className='blog__item-imglink' href=''>
-                  <img src='images/blog/2.png' alt='img blog' />
+                  <img src='/images/blog/2.png' alt='img blog' />
                 </a>
                 <div className='blog__item-box'>
                   <span className='blog__item-news'>NEWS</span>
@@ -204,7 +204,7 @@ const ContactBlock = () => {
             <div className='blog__items'>
               <div className='blog__item'>
                 <a className='blog__item-imglink' href=''>
-                  <img src='images/blog/3.png' alt='img blog' />
+                  <img src='/images/blog/3.png' alt='img blog' />
                 </a>
                 <div className='blog__item-box'>
                   <span className='blog__item-news'>NEWS</span>
@@ -221,11 +221,11 @@ const ContactBlock = () => {
             </div>
             <div className='partners'>
               <div className='partners__images'>
-                <img src='images/partners/1.png' alt='partners img' />
-                <img src='images/partners/2.png' alt='partners img' />
-                <img src='images/partners/3.png' alt='partners img' />
-                <img src='images/partners/4.png' alt='partners img' />
-                <img src='images/partners/5.png' alt='partners img' />
+                <img src='/images/partners/1.png' alt='partners img' />
+                <img src='/images/partners/2.png' alt='partners img' />
+                <img src='/images/partners/3.png' alt='partners img' />
+                <img src='/images/partners/4.png' alt='partners img' />
+                <img src='/images/partners/5.png' alt='partners img' />
               </div>
             </div>
           </div>
