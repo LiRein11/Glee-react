@@ -18,7 +18,18 @@ const RatingStars: FC<IRating> = ({ clickRating, isAuth, ratingVal, isAccessRati
       />
     );
   } else {
-    return <Rating name='read-only' value={ratingVal} readOnly size='large' />;
+    return (
+      <div style={{ display: 'flex' }}>
+        <Rating
+          style={{ marginRight: '10px' }}
+          name='read-only'
+          value={ratingVal}
+          readOnly
+          size='large'
+        />
+        <span>Спасибо за оценку!</span>
+      </div>
+    );
   }
 };
 

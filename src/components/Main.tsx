@@ -25,7 +25,7 @@ const Main = () => {
   const { filter, cart } = useSelector((state: RootState) => state);
   const dispatch = useDispatch<AppDispatch>();
 
-  const limit: number = 13;
+  const limit: number = 10;
 
   const { data, isError } = useQuery(['devices', null, null, 1, limit], () =>
     fetchDevices(null, null, 1, limit),
@@ -192,10 +192,10 @@ const Main = () => {
           <div className='design__items'>
             {allDevices
               ? filter.filterDesignCategory === 0
-                ? allDevices.map((obj) => (
+                ? allDevices.rows.map((obj) => (
                     <>{obj.text === 'Classic' ? <DesignItem item={obj} key={obj.id} /> : ''}</>
                   ))
-                : allDevices.map((obj) =>
+                : allDevices.rows.map((obj) =>
                     obj.typeId === filter.filterDesignCategory && obj.text === 'Classic' ? (
                       <DesignItem item={obj} key={obj.id} />
                     ) : (

@@ -3,38 +3,30 @@ import { NavLink } from 'react-router-dom';
 import Footer from '../../Footer';
 import Header from '../../Header';
 // import Typography from '@material-ui/Typography';
-import Slider from '@mui/material/Slider';
 
 import { useQuery } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchDevices, fetchDevicesAll, getBrands, getTypes } from '../../../http/deviceAPI';
+import { fetchDevices } from '../../../http/deviceAPI';
 import { AppDispatch, RootState } from '../../../store';
 import { fetchOneBasket } from '../../../store/slices/cartSlice';
-import {
-  fetchBrandsThunk,
-  fetchTypesThunk,
-  setCurrentPrice,
-  toggleActiveIndexArrBrands,
-  toggleActiveIndexArrTypes,
-} from '../../../store/slices/filterSlice';
+import { fetchBrandsThunk, fetchTypesThunk } from '../../../store/slices/filterSlice';
 
-import { IBrand, IType } from '../../products.interface';
-import CatalogLeftBar from '../CatalogLeftBar';
 import CatalogContent from '../CatalogContent';
+import CatalogLeftBar from '../CatalogLeftBar';
 
 const CatalogBlockOne = () => {
   const filter = useSelector((state: RootState) => state.filter);
   const dispatch = useDispatch<AppDispatch>();
 
-  const [brandId, setBrandId] = React.useState(filter.activeIndexBrands);
-  const [typeId, setTypeId] = React.useState(filter.activeIndexTypes);
-  const [page, setPage] = React.useState(1);
+  // const [brandId, setBrandId] = React.useState(filter.activeIndexBrands);
+  // const [typeId, setTypeId] = React.useState(filter.activeIndexTypes);
+  // const [page, setPage] = React.useState(1);
   const [limit, setLimit] = React.useState(9);
   const [pageNumbers, setPageNumbers] = React.useState<number[]>([]);
 
-  const { data: types, isLoading: loadingTypes } = useQuery<IType[]>('fetchTypes', getTypes);
-  const { data: brands, isLoading: loadingBrands } = useQuery('fetchBrands', getBrands);
-  const { data: allDevices } = useQuery('fetchAllDevices', fetchDevicesAll);
+  // const { data: types, isLoading: loadingTypes } = useQuery<IType[]>('fetchTypes', getTypes);
+  // const { data: brands, isLoading: loadingBrands } = useQuery('fetchBrands', getBrands);
+  // const { data: allDevices } = useQuery('fetchAllDevices', fetchDevicesAll);
   const { data: devices, refetch } = useQuery(
     [
       'devices',
@@ -56,9 +48,9 @@ const CatalogBlockOne = () => {
       ),
   );
 
-  function handleChanges(event: Event, newValue: any) {
-    dispatch(setCurrentPrice(newValue));
-  }
+  // function handleChanges(event: Event, newValue: any) {
+  //   dispatch(setCurrentPrice(newValue));
+  // }
 
   useEffect(() => {
     dispatch(fetchOneBasket());
@@ -76,19 +68,19 @@ const CatalogBlockOne = () => {
   //   setPageNumbers(newPageNumbers);
   // }, [devices, limit, filter]);
 
-  const toggleTypes = async (index: number | null) => {
-    dispatch(toggleActiveIndexArrTypes(index));
-    setTypeId(index);
-  };
+  // const toggleTypes = async (index: number | null) => {
+  //   dispatch(toggleActiveIndexArrTypes(index));
+  //   setTypeId(index);
+  // };
 
-  const toggleBrands = (index: number | null) => {
-    dispatch(toggleActiveIndexArrBrands(index));
-    setBrandId(index);
-  };
+  // const toggleBrands = (index: number | null) => {
+  //   dispatch(toggleActiveIndexArrBrands(index));
+  //   setBrandId(index);
+  // };
 
-  const onClickPagination = (index: number) => {
-    setPage(index + 1);
-  };
+  // const onClickPagination = (index: number) => {
+  //   setPage(index + 1);
+  // };
 
   // console.log(devices);
   console.log(pageNumbers);

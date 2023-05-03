@@ -598,6 +598,7 @@
     color: $default;
   }
   &__buttons {
+    cursor:pointer;
     & + .related__buttons {
       margin-left: 20px;
     }
@@ -609,6 +610,7 @@
     background-color: #fff;
   }
   &__buttons--active {
+    cursor:pointer;
     border-color: #edf1f4;
   }
   &__items {

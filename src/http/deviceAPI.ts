@@ -37,7 +37,7 @@ export const getBrands = async () => {
   return data;
 };
 
-export const fetchDevices = async (brandId, typeId, page?, limit?, priceMin?, priceMax?) => {
+export const fetchDevices = async (brandId?:number|null, typeId?:number|null, page?:number, limit?:number, priceMin?:number, priceMax?:number) => {
   const { data } = await $host.get<IProducts>(`http://localhost:5000/api/device`, {
     params: {
       brandId,
@@ -53,11 +53,11 @@ export const fetchDevices = async (brandId, typeId, page?, limit?, priceMin?, pr
 
 export const fetchDevicesAll = async () => {
   const { data } = await $host.get<IProducts>(`http://localhost:5000/api/device/all`);
-  return data.rows;
+  return data;
 };
 
 export const fetchOneDevice = async (id:number) => {
-  const { data } = await $host.get('api/device/' + id);
+  const { data } = await $host.get<IProductItem>('api/device/' + id);
   return data;
 };
 

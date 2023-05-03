@@ -140,7 +140,7 @@ const CatalogLeftBar: FC = () => {
                     : 'filter-category__checkbox'
                 }>
                 <span>All</span>
-                <span className='filter-brand__num'>({allDevices?.length})</span>
+                <span className='filter-brand__num'>({allDevices?.rows.length})</span>
               </div>
             </div>
             {loadingBrands

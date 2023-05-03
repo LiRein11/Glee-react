@@ -1,14 +1,14 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
+import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { AppDispatch } from '../store';
 import { IBasketDevice } from './products.interface';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../store';
 
-import { fetchOneBasket, setDeleteDevice } from '../store/slices/cartSlice';
-import { addDeviceToBasket, getBrands } from '../http/deviceAPI';
-import ButtonFavorites from './Favorites/ButtonFavorites';
 import { useQuery } from 'react-query';
+import { addDeviceToBasket, getBrands } from '../http/deviceAPI';
+import { fetchOneBasket, setDeleteDevice } from '../store/slices/cartSlice';
+import ButtonFavorites from './Favorites/ButtonFavorites';
 
 const ProductItem: FC<IBasketDevice> = (device) => {
   const dispatch = useDispatch<AppDispatch>();
@@ -16,6 +16,7 @@ const ProductItem: FC<IBasketDevice> = (device) => {
   const { data: brands, isLoading: loadingBrands } = useQuery('fetchBrands', getBrands);
 
   const pathCart = location.pathname === '/cart';
+  const { pathname } = location;
 
   const addToCart = async (id: number) => {
     await addDeviceToBasket(id);
@@ -32,11 +33,7 @@ const ProductItem: FC<IBasketDevice> = (device) => {
     <div className='products-item'>
       <div className='products-item__img-box'>
         <div className='products-item__brand'>
-          <p>
-            {loadingBrands || !brands
-              ? ''
-              : brands[device.device.brandId - 1].name}
-          </p>
+          <p>{loadingBrands || !brands ? '' : brands[device.device.brandId - 1].name}</p>
         </div>
         {device.device.img === 'c533adb7-596c-4fb9-9ba1-ad2793ee757e.jpg' ? (
           <span className='products-item__centrr'>
@@ -58,7 +55,16 @@ const ProductItem: FC<IBasketDevice> = (device) => {
 
         {!pathCart ? (
           <div className='products-item__link-box'>
-            <button className='products-item__link' onClick={() => navigate('#')}>
+            <button
+              className='products-item__link'
+              onClick={() => {
+                if (pathname === `/productDetails/${device.device.id}`) {
+                  return;
+                }
+                navigate(`/productDetails/${device.device.id}`, {
+                  replace: true,
+                });
+              }}>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 width='20px'
