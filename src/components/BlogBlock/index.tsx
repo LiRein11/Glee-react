@@ -1,8 +1,17 @@
 import React from 'react';
 import Footer from '../Footer';
 import Header from '../Header';
+import { useQuery } from 'react-query';
+import { getAllPosts } from '../../http/postAPI';
+import { IPost, IPosts, IPostsCount } from '../posts.interface';
+import { NavLink, useNavigate } from 'react-router-dom';
+import Pagination from '../Pagination';
 
 const BlogBlock = () => {
+  const { data } = useQuery<IPost[] & IPostsCount>('fetchAllPost', getAllPosts);
+  console.log(data);
+  const navigate = useNavigate();
+
   return (
     <>
       <Header />
@@ -30,117 +39,30 @@ const BlogBlock = () => {
             <div className='container'>
               <div className='blog-page__inner'>
                 <div className='blog-page__content'>
-                  <div className='blog-item'>
-                    <div className='blog-item__box'>
-                      <a href='#'>
-                        <img
-                          className='blog-item__img'
-                          src='/images/blog/blog-page/1.jpg'
-                          alt='blog img'
-                        />
-                      </a>
-                      <div className='blog-item__info'>
-                        <span className='blog-item__date'>28 JANUARY, 2020</span>
-                        <a className='blog-item__author' href='#'>
-                          BY ADMIN
-                        </a>
+                  {data?.map((post) => (
+                    <div className='blog-item'>
+                      <div className='blog-item__box'>
+                        <NavLink to={'/blogDetails/' + post.id}>
+                          <img
+                            className='blog-item__img'
+                            src={post ? process.env.REACT_APP_API_URL + post?.imageUrl : ''}
+                            alt='blog img'
+                          />
+                        </NavLink>
+                        <div className='blog-item__info'>
+                          <span className='blog-item__date'>28 JANUARY, 2020</span>
+                          <a className='blog-item__author' href='#'>
+                            BY ADMIN
+                          </a>
+                        </div>
                       </div>
+                      <a className='blog-item__title'>{post.title}</a>
+                      <p className='blog-item__text'>{post.text}</p>
+                      <NavLink className='blog-item__link' to={'/blogDetails/' + post.id}>
+                        View More
+                      </NavLink>
                     </div>
-                    <a className='blog-item__title'>Fonsectetur adipisicing eiusmod</a>
-                    <p className='blog-item__text'>
-                      consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                      dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut alLorem ipsum dolor sit amet, consectetur adipisicing
-                      elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                    </p>
-                    <a className='blog-item__link' href='#'>
-                      View More
-                    </a>
-                  </div>
-
-                  <div className='blog-item'>
-                    <div className='blog-item__box'>
-                      <a href='#'>
-                        <img
-                          className='blog-item__img'
-                          src='/images/blog/blog-page/2.jpg'
-                          alt='blog img'
-                        />
-                      </a>
-                      <div className='blog-item__info'>
-                        <span className='blog-item__date'>28 JANUARY, 2020</span>
-                        <a className='blog-item__author' href='#'>
-                          BY ADMIN
-                        </a>
-                      </div>
-                    </div>
-                    <a className='blog-item__title'>Fonsectetur adipisicing elit</a>
-                    <p className='blog-item__text'>
-                      consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                      dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut alLorem ipsum dolor sit amet, consectetur adipisicing
-                      elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                    </p>
-                    <a className='blog-item__link' href='#'>
-                      View More
-                    </a>
-                  </div>
-
-                  <div className='blog-item'>
-                    <div className='blog-item__box'>
-                      <a href='#'>
-                        <img
-                          className='blog-item__img'
-                          src='/images/blog/blog-page/3.jpg'
-                          alt='blog img'
-                        />
-                      </a>
-                      <div className='blog-item__info'>
-                        <span className='blog-item__date'>28 JANUARY, 2020</span>
-                        <a className='blog-item__author' href='#'>
-                          BY ADMIN
-                        </a>
-                      </div>
-                    </div>
-                    <a className='blog-item__title'>Fsectetur adipisicing tempor incididunt</a>
-                    <p className='blog-item__text'>
-                      consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                      dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut alLorem ipsum dolor sit amet, consectetur adipisicing
-                      elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                    </p>
-                    <a className='blog-item__link' href='#'>
-                      View More
-                    </a>
-                  </div>
-
-                  <div className='blog-item'>
-                    <div className='blog-item__box'>
-                      <a href='#'>
-                        <img
-                          className='blog-item__img'
-                          src='/images/blog/blog-page/4.jpg'
-                          alt='blog img'
-                        />
-                      </a>
-                      <div className='blog-item__info'>
-                        <span className='blog-item__date'>28 JANUARY, 2020</span>
-                        <a className='blog-item__author' href='#'>
-                          BY ADMIN
-                        </a>
-                      </div>
-                    </div>
-                    <a className='blog-item__title'>Vonsectetur adipisicing elit</a>
-                    <p className='blog-item__text'>
-                      consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                      dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut alLorem ipsum dolor sit amet, consectetur adipisicing
-                      elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                    </p>
-                    <a className='blog-item__link' href='#'>
-                      View More
-                    </a>
-                  </div>
+                  ))}
                 </div>
 
                 <div className='blog-page__filters'>
@@ -173,9 +95,9 @@ const BlogBlock = () => {
 
                   <div className='filter__item filter-category'>
                     <h4 className='filter__title'>
-                      <span>CATEGORY</span>
+                      <span>TAGS</span>
                     </h4>
-                    <form className='filter-category__form' action='#'>
+                    {/* <form className='filter-category__form' action='#'>
                       <label className='filter-category__label'>
                         <input className='filter-category__input' type='checkbox' defaultChecked />
                         <div className='filter-category__checkbox'>
@@ -211,7 +133,7 @@ const BlogBlock = () => {
                           <span>{'>'}</span>
                         </div>
                       </label>
-                    </form>
+                    </form> */}
                   </div>
 
                   <div className='filter__item filter-posts'>
@@ -273,31 +195,7 @@ const BlogBlock = () => {
                   </div>
                 </div>
               </div>
-              <div className='pagination pagination-blog'>
-                <a className='pagination__prev pagination__arrow' href='#'>
-                  Previous
-                </a>
-                <ul className='pagination__list'>
-                  <li className='pagination__item'>
-                    <a className='pagination__link pagination__link--active' href='#'>
-                      1
-                    </a>
-                  </li>
-                  <li className='pagination__item'>
-                    <a className='pagination__link' href='#'>
-                      2
-                    </a>
-                  </li>
-                  <li className='pagination__item'>
-                    <a className='pagination__link' href='#'>
-                      3
-                    </a>
-                  </li>
-                </ul>
-                <a className='pagination__next pagination__arrow' href='#'>
-                  Next
-                </a>
-              </div>
+              <Pagination devices={data ? data : undefined} limit={2} />
             </div>
           </section>
         </section>

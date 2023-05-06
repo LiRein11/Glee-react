@@ -1,8 +1,16 @@
 import React from 'react';
 import Footer from '../Footer';
 import Header from '../Header';
+import { useQuery } from 'react-query';
+import { getOnePost } from '../../http/postAPI';
+import { IPost } from '../posts.interface';
+import { useParams } from 'react-router-dom';
 
 const BlogDetailsBlock = () => {
+    
+  const { id } = useParams();
+  const { data: post } = useQuery<IPost>(['fetchOnePost', id], () => getOnePost(id));
+
   return (
     <>
       <Header />
@@ -10,7 +18,7 @@ const BlogDetailsBlock = () => {
       <main className='main'>
         <section className='top'>
           <div className='top-container'>
-            <h2 className='top__title title'>Log in</h2>
+            <h2 className='top__title title'>Blog Details</h2>
             <div className='breadcrumbs'>
               <ul className='breadcrumbs__list'>
                 <li className='breadcrumbs__item'>
@@ -20,7 +28,7 @@ const BlogDetailsBlock = () => {
                 </li>
                 <li className='breadcrumbs__item'>
                   <a className='breadcrumbs__link' href='#'>
-                    Log in
+                    Blog Details
                   </a>
                 </li>
               </ul>
@@ -37,7 +45,7 @@ const BlogDetailsBlock = () => {
                     <a href='#'>
                       <img
                         className='blog-item__img'
-                        src='/images/blog/blog-page/1.jpg'
+                        src={post ? process.env.REACT_APP_API_URL + post?.imageUrl : ''}
                         alt='blog img'
                       />
                     </a>
@@ -48,51 +56,25 @@ const BlogDetailsBlock = () => {
                       </a>
                     </div>
                   </div>
-                  <a className='blog-item__title blog-item__title-detalis'>
-                    Fonsectetur adipisicing eiusmod
-                  </a>
-                  <p className='blog-item__text-detalis'>
-                    Sdipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim venia Lorem ipsum dolor sit amet, consectetur
-                    adipisicing elit,
-                  </p>
-                  <p className='blog-item__text-one'>
-                    consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut alLorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                    dolore eu fugiat nulla pariatur.
-                  </p>
+                  <a className='blog-item__title blog-item__title-detalis'>{post?.title}</a>
+                  <p className='blog-item__text-one'>{post?.text}</p>
                   <blockquote className='blog-item__blockquote'>
-                    <p>
-                      Sdipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                    </p>
+                    <p>{post?.quote}</p>
                     <span className='blog-item__blockquote-author'>Wiusmod tempor</span>
                   </blockquote>
                   <div className='blog-item__content'>
                     <img
                       className='blog-item__content-img'
-                      src='/images/blog/blog-detalis/1.jpg'
+                      src={post ? process.env.REACT_APP_API_URL + post?.smallImageUrl : ''}
                       alt='content img'
                     />
                     <div className='blog-item__content-box'>
-                      <h6 className='blog-item__content-title'>Riusmod tempor incididunt</h6>
-                      <p className='blog-item__content-text'>
-                        consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                        ullamco laboris nisi ut aliquip ex ea commodo
-                      </p>
+                      <h6 className='blog-item__content-title'>{post?.miniTitleOne}</h6>
+                      <p className='blog-item__content-text'>{post?.textMiniOne}</p>
                     </div>
                   </div>
-                  <h6 className='blog-item__titletitle'>Kajtsal jervcm eoaspckred</h6>
-                  <p className='blog-item__texttext'>
-                    consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut aliquip ex ea commodo
-                  </p>
+                  <h6 className='blog-item__titletitle'>{post?.miniTitleTwo}</h6>
+                  <p className='blog-item__texttext'>{post?.textMiniOne}</p>
                   <div className='blog-item__inner'>
                     <div className='blog-item__left'>
                       <div className='blog-item__left-content'>
@@ -313,7 +295,7 @@ const BlogDetailsBlock = () => {
                   </form>
                 </div>
 
-                <div className='filter__item filter-category'>
+                {/* <div className='filter__item filter-category'>
                   <h4 className='filter__title'>
                     <span>CATEGORY</span>
                   </h4>
@@ -354,7 +336,7 @@ const BlogDetailsBlock = () => {
                       </div>
                     </label>
                   </form>
-                </div>
+                </div> */}
 
                 <div className='filter__item filter-posts'>
                   <h4 className='filter__title'>

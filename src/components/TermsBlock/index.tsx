@@ -10,7 +10,7 @@ const TermsBlock = () => {
       <main className='main'>
         <section className='top'>
           <div className='top-container'>
-            <h2 className='top__title title'>Log in</h2>
+            <h2 className='top__title title'>Terms</h2>
             <div className='breadcrumbs'>
               <ul className='breadcrumbs__list'>
                 <li className='breadcrumbs__item'>
@@ -20,7 +20,7 @@ const TermsBlock = () => {
                 </li>
                 <li className='breadcrumbs__item'>
                   <a className='breadcrumbs__link' href='#'>
-                    Log in
+                    Terms
                   </a>
                 </li>
               </ul>

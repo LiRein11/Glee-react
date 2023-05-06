@@ -5,9 +5,10 @@ import Footer from '../Footer';
 import Header from '../Header';
 
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { check, login, registration } from '../../http/userAPI';
+import { check, getOneUser, login, registration } from '../../http/userAPI';
 import '../../scss/login.scss';
-import { IDataToken } from '../products.interface';
+import { IDataToken, IUser } from '../products.interface';
+import { useQuery } from 'react-query';
 // import { useQuery } from 'react-query';
 
 const LoginBlock: React.FC = () => {
@@ -19,6 +20,8 @@ const LoginBlock: React.FC = () => {
   const navigate = useNavigate();
 
   const token: string | null = localStorage.getItem('token');
+
+  const { data: user } = useQuery<IUser>('fetchOneUser', getOneUser);
 
   // const pokemons = useStore((state) => state.pokemons);
   // const removePokemon = useStore((state) => state.removePokemon);
@@ -52,15 +55,14 @@ const LoginBlock: React.FC = () => {
         localStorage.removeItem('token');
         navigate('/login');
       }
-      console.log(data, dateNow.getTime());
-      return (
-        <>
-          <div>Email: {data.email}</div>
-          <div>Role: {data.role}</div>
-        </>
-      );
+
+      return;
     }
   };
+
+  React.useEffect(() => {
+    info();
+  }, []);
 
   return (
     <>
@@ -87,9 +89,34 @@ const LoginBlock: React.FC = () => {
                 </div>
               </div>
             </section>
-            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-              <div>{info()}</div>
-              <button onClick={logout}>Logout</button>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-around',
+                alignItems: 'center',
+                height: '100px',
+              }}>
+              {user ? (
+                <>
+                  <img
+                    style={{ width: '100px', borderRadius:'50%', padding:'5px'}}
+                    src={process.env.REACT_APP_API_URL + user?.avatarUrl}
+                    alt='avatar'
+                  />
+                  <div style={{ display: 'block' }}>
+                    <div>
+                      <span> Name: {user?.name}</span>
+                      <span style={{ display: 'block' }}> Email: {user?.email}</span>
+                      <span>Role: {user?.role}</span>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                ''
+              )}
+              <button className='footer-top__form-btn' onClick={logout}>
+                Logout
+              </button>
               {/* <div>
                 {pokemons.map((pokemon: any) => (
                   <li key={pokemon.id}>

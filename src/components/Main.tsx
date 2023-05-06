@@ -5,7 +5,7 @@ import Slider from './Slider';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import DesignItem from './DesignItem';
-import { IProducts } from './products.interface';
+import { IDataToken } from './products.interface';
 // import { addProduct } from '../store/slices/cartSlice';
 import { AppDispatch, RootState } from '../store';
 
@@ -20,12 +20,16 @@ import {
 import { fetchOneBasket } from '../store/slices/cartSlice';
 import { useFavorites } from '../hooks/useFavorites';
 import { fetchDevices, fetchDevicesAll } from '../http/deviceAPI';
+import jwt_decode from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 
 const Main = () => {
   const { filter, cart } = useSelector((state: RootState) => state);
   const dispatch = useDispatch<AppDispatch>();
 
-  const limit: number = 10;
+  const token: string | null = localStorage.getItem('token');
+  const limit: number = 14;
+  const navigate = useNavigate();
 
   const { data, isError } = useQuery(['devices', null, null, 1, limit], () =>
     fetchDevices(null, null, 1, limit),
@@ -33,13 +37,23 @@ const Main = () => {
   const { data: allDevices } = useQuery('fetchAllDevices', fetchDevicesAll);
 
   const { favoritesDevices, isLoading, refetch } = useFavorites();
-
+console.log(data);
   React.useEffect(() => {
     dispatch(fetchOneBasket());
   }, [favoritesDevices]);
 
   React.useEffect(() => {
     dispatch(fetchTypesThunk());
+
+    if (token) {
+      const data: IDataToken = jwt_decode(token);
+      const dateNow = new Date();
+      if (dateNow.getTime() > data.exp * 1000) {
+        localStorage.removeItem('token');
+      }
+      console.log(data, dateNow.getTime());
+      return;
+    }
   }, []);
 
   const onClickFilter = (index: number) => {

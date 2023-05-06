@@ -87,7 +87,7 @@ const CatalogBlockTwo = () => {
       <main className='main'>
         <section className='top'>
           <div className='top-container'>
-            <h2 className='top__title title'>Log in</h2>
+            <h2 className='top__title title'>Catalog Two</h2>
             <div className='breadcrumbs'>
               <ul className='breadcrumbs__list'>
                 <li className='breadcrumbs__item'>
@@ -97,7 +97,7 @@ const CatalogBlockTwo = () => {
                 </li>
                 <li className='breadcrumbs__item'>
                   <a className='breadcrumbs__link' href='#'>
-                    Log in
+                    Catalog Two
                   </a>
                 </li>
               </ul>

@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="footer-top">
           <div className="footer-top__item footer-top__contact">
             <a className="logo footer-top__logo" href="#">
-              <img className="logo__img" src="images/logo.png" alt="logo" />
+              <img className="logo__img" src="/images/logo.png" alt="logo" />
             </a>
             <a className="footer-top__address" href="#">
               ADDRESS: 4772 Wines Lane Houston, TX 77032

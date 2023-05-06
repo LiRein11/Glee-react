@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IProducts } from './products.interface';
 import { AppDispatch, RootState } from '../store';
 import { setPage } from '../store/slices/filterSlice';
+import { IPost, IPostsCount } from './posts.interface';
 
 const Pagination: FC<{
-  devices: IProducts | undefined;
+  devices: IProducts | (IPost[] & IPostsCount) | undefined;
   limit: number | undefined;
   count?: number;
   pageNoSlice?: number;

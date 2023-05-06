@@ -43,6 +43,17 @@ export interface IDataToken {
   exp: number;
   email: string;
   role: string;
+  name: string;
+}
+
+export interface IUser {
+  email: string;
+  name: string;
+  avatarUrl: string;
+  id: number;
+  favorites: [];
+  role: string;
+  userComments: [];
 }
 
 export interface IRating {
@@ -51,6 +62,8 @@ export interface IRating {
   isAuth: boolean;
   isAccessRating: boolean;
 }
+
+
 
 // export interface IProducts {
 //   products: {

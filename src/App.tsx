@@ -27,7 +27,7 @@ const App: FC = () => {
           <Route path='/productDetails/:id' element={<ProductDetails />} />
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
-          <Route path='/blogDetails' element={<BlogDetails />} />
+          <Route path='/blogDetails/:id' element={<BlogDetails />} />
           <Route path='/blog' element={<Blog />} />
           <Route path='/catalogOne' element={<CatalogOne />} />
           <Route path='/catalogTwo' element={<CatalogTwo />} />

@@ -67,14 +67,14 @@ const Header: FC = () => {
                     <NavLink className='menu__list-link' to='/productDetails/1'>
                       ProductDetails
                     </NavLink>
-                    <NavLink className='menu__list-link' to='/terms'>
-                      Terms
-                    </NavLink>
-                    <NavLink className='menu__list-link' to='/blogDetails'>
-                      BlogDetails
-                    </NavLink>
                     <NavLink className='menu__list-link' to='/blog'>
                       Blog
+                    </NavLink>
+                    <NavLink className='menu__list-link' to='/blogDetails/1'>
+                      BlogDetails
+                    </NavLink>
+                    <NavLink className='menu__list-link' to='/terms'>
+                      Terms
                     </NavLink>
                   </div>
                 </div>

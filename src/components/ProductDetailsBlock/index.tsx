@@ -1,13 +1,12 @@
 import React, { FC, MouseEvent } from 'react';
 import Footer from '../Footer';
 import Header from '../Header';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import {
   addDeviceToBasket,
   addRating,
   checkRating,
   fetchDevices,
-  fetchDevicesAll,
   fetchOneDevice,
 } from '../../http/deviceAPI';
 import { AppDispatch } from '../../store';
@@ -20,15 +19,16 @@ import RelatedProducts from './RelatedProducts';
 const ProductDetailsBlock: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const navigate = useNavigate();
   const [resRate, setResRate] = React.useState(0);
   const [isAccessRating, setIsAccessRating] = React.useState(false);
   const [count, setCount] = React.useState(1);
   const { id }: any = useParams();
   const token: string | null = localStorage.getItem('token');
-  const limit:number = 4;
+  const limit: number = 4;
   // const { data: allDevices } = useQuery('fetchAllDevices', fetchDevicesAll);
-  const { data: devices} = useQuery(['devices', null, null, 1,limit], () => fetchDevices(null,null, 1,limit));
+  const { data: devices } = useQuery(['devices', null, null, 1, limit], () =>
+    fetchDevices(null, null, 1, limit),
+  );
 
   const { data: device } = useQuery(['fetchDevice', id], () => fetchOneDevice(id));
 
@@ -208,7 +208,7 @@ const ProductDetailsBlock: FC = () => {
                 </div>
               </div>
             </section>
-            <RelatedProducts/>
+            <RelatedProducts />
 
             <section className='blog'>
               <div className='container'>
