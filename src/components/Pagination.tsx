@@ -4,15 +4,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IProducts } from './products.interface';
 import { AppDispatch, RootState } from '../store';
 import { setPage } from '../store/slices/filterSlice';
-import { IPost, IPostsCount } from './posts.interface';
+import { IPosts } from './posts.interface';
+import { useLocation } from 'react-router-dom';
 
 const Pagination: FC<{
-  devices: IProducts | (IPost[] & IPostsCount) | undefined;
+  devices: IProducts | IPosts | undefined;
   limit: number | undefined;
-  count?: number;
+  count?: number | undefined;
   pageNoSlice?: number;
   setPageNoSlice?: any;
-}> = ({ devices, limit, count, pageNoSlice, setPageNoSlice }) => {
+  pageBlog?: number;
+  setPageBlog?: any;
+}> = ({ devices, limit, count, pageNoSlice, pageBlog, setPageBlog, setPageNoSlice }) => {
+  const location = useLocation();
+  const pathBlogLoc = location.pathname.includes('/blog');
+
   const filter = useSelector((state: RootState) => state.filter);
   const dispatch = useDispatch<AppDispatch>();
   // const [pageNoSlice, setPageNoSlice] = React.useState(1);
@@ -35,13 +41,17 @@ const Pagination: FC<{
     dispatch(setPage(index + 1));
   };
 
+  const onClickPaginationBlog = (index: number) => {
+    setPageBlog(index + 1);
+  };
+
   const onClickPaginationNoSlice = (index: number) => {
     setPageNoSlice(index + 1);
   };
 
   return (
     <>
-      {count ? (
+      {count && pageNoSlice ? (
         <>
           <button
             className={
@@ -97,6 +107,42 @@ const Pagination: FC<{
             </svg>
           </button>
         </>
+      ) : pageBlog && pathBlogLoc ? (
+        <div
+          style={{ marginTop: '30px' }}
+          className='pagination pagination-line'>
+          <button
+            className='pagination__prev pagination__arrow'
+            onClick={pageBlog === 1 ? () => setPageBlog(pageBlog) : () => setPageBlog(pageBlog - 1)}
+            disabled={pageBlog === 1 ? true : false}>
+            Previous
+          </button>
+          <ul className='pagination__list'>
+            {pageNumbers.map((el, i) => (
+              <li className='pagination__item'>
+                <div
+                  className={
+                    i === pageBlog - 1
+                      ? 'pagination__link pagination__link--active'
+                      : 'pagination__link'
+                  }
+                  onClick={() => onClickPaginationBlog(i)}>
+                  {el}
+                </div>
+              </li>
+            ))}
+          </ul>
+          <button
+            className='pagination__next pagination__arrow'
+            onClick={
+              pageBlog === pageNumbers.length
+                ? () => setPageBlog(pageBlog)
+                : () => setPageBlog(pageBlog + 1)
+            }
+            disabled={pageBlog === pageNumbers.length ? true : false}>
+            Next
+          </button>
+        </div>
       ) : (
         <div className={limit === 9 ? 'pagination' : 'pagination pagination-line'}>
           <button

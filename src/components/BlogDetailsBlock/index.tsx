@@ -3,13 +3,27 @@ import Footer from '../Footer';
 import Header from '../Header';
 import { useQuery } from 'react-query';
 import { getOnePost } from '../../http/postAPI';
-import { IPost } from '../posts.interface';
+import { IComment, IPost } from '../posts.interface';
 import { useParams } from 'react-router-dom';
+import { IUser } from '../products.interface';
+import { getOneUser, getUserById } from '../../http/userAPI';
 
 const BlogDetailsBlock = () => {
-    
+  const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  };
+
   const { id } = useParams();
+
   const { data: post } = useQuery<IPost>(['fetchOnePost', id], () => getOnePost(id));
+
+  const { data: user } = useQuery<IUser>(['fetchOneUser', post?.userId], () =>
+    getUserById(post?.userId),
+  );
+
+  console.log(post);
 
   return (
     <>
@@ -50,9 +64,14 @@ const BlogDetailsBlock = () => {
                       />
                     </a>
                     <div className='blog-item__info'>
-                      <span className='blog-item__date'>28 JANUARY, 2020</span>
+                      <span className='blog-item__date'>
+                        {new Date(post !== undefined ? post.createdAt : 0).toLocaleDateString(
+                          'ru-RU',
+                          options,
+                        )}
+                      </span>
                       <a className='blog-item__author' href='#'>
-                        BY ADMIN
+                        By {user?.role}
                       </a>
                     </div>
                   </div>
@@ -80,19 +99,23 @@ const BlogDetailsBlock = () => {
                       <div className='blog-item__left-content'>
                         <img
                           className='blog-item__left-img'
-                          src='/images/blog/blog-detalis/2.jpg'
+                          src={
+                            user !== undefined
+                              ? process.env.REACT_APP_API_URL + user?.avatarUrl
+                              : ''
+                          }
                           alt='img blog detalis'
                         />
                         <div className='blog-item__left-info'>
-                          <h5 className='blog-item__left-title'>Mark N. Hernandez</h5>
-                          <p className='blog-item__left-text'>Designer</p>
+                          <h5 className='blog-item__left-title'>{user?.name}</h5>
+                          <p className='blog-item__left-text'>{user?.role}</p>
                         </div>
                       </div>
                     </div>
                     <div className='blog-item__right'>
-                      <span className='blog-item__right-span'>Tags:</span>
-                      <p className='blog-item__right-text'>All, Trending</p>
-                      <span className='blog-item__right-span'>Share:</span>
+                      <span className='blog-item__right-span'>Tags: </span>
+                      <p className='blog-item__right-text'>{post?.tags.join(', ')}</p>
+                      {/* <span className='blog-item__right-span'>Share:</span>
                       <div className='blog-item__right-links'>
                         <a className='blog-item__right-link' href='#'>
                           <svg
@@ -174,76 +197,36 @@ const BlogDetailsBlock = () => {
                             </g>
                           </svg>
                         </a>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                   <div className='comments'>
-                    <h4 className='comments__title comments__title--active'>3 Comments</h4>
-                    <div className='comments__comment'>
-                      <img
-                        className='comments__img'
-                        src='/images/blog/avatar/1.jpg'
-                        alt='img avatar'
-                      />
-                      <div className='comments__content'>
-                        <div className='comments__info'>
-                          <h5 className='comments__info-title'>Delores G. Roberts</h5>
-                          <p className='comments__info-date'>Add 11 Oct 2020</p>
+                    <h4 className='comments__title comments__title--active'>
+                      {post?.postComments.length} Comments
+                    </h4>
+                    {post?.postComments.map((comment) => (
+                      <div className='comments__comment'>
+                        <img
+                          className='comments__img'
+                          src={process.env.REACT_APP_API_URL + comment.user.avatarUrl}
+                          alt='img avatar'
+                        />
+                        <div className='comments__content'>
+                          <div className='comments__info'>
+                            <h5 className='comments__info-title'>{comment.user.name}</h5>
+                            <p className='comments__info-date'>
+                              {new Date(comment.createdAt).toLocaleDateString('ru-RU', options)}
+                            </p>
+                          </div>
+                          <p className='comments__text'>
+                            {comment.text}
+                          </p>
+                          <a className='comments__reply' href='#'>
+                            Reply
+                          </a>
                         </div>
-                        <p className='comments__text'>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-                          fringilla massa et tristique convallis. Class aptent taciti sociosqu ad
-                          litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse
-                          orci sem, ultrices
-                        </p>
-                        <a className='comments__reply' href='#'>
-                          Reply
-                        </a>
                       </div>
-                    </div>
-                    <div className='comments__comment comments__comment--active'>
-                      <img
-                        className='comments__img'
-                        src='/images/blog/avatar/2.jpg'
-                        alt='img avatar'
-                      />
-                      <div className='comments__content'>
-                        <div className='comments__info'>
-                          <h5 className='comments__info-title'>Shannon S. Williams</h5>
-                          <p className='comments__info-date'>Add 11 Oct 2020</p>
-                        </div>
-                        <p className='comments__text'>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-                          fringilla massa et tristique convallis. Class aptent taciti sociosqu ad
-                          litora torquent per conubia nostra
-                        </p>
-                        <a className='comments__reply' href='#'>
-                          Reply
-                        </a>
-                      </div>
-                    </div>
-                    <div className='comments__comment'>
-                      <img
-                        className='comments__img'
-                        src='/images/blog/avatar/3.jpg'
-                        alt='img avatar'
-                      />
-                      <div className='comments__content'>
-                        <div className='comments__info'>
-                          <h5 className='comments__info-title'>Nicholas R. Coley</h5>
-                          <p className='comments__info-date'>Add 11 Oct 2020</p>
-                        </div>
-                        <p className='comments__text'>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-                          fringilla massa et tristique convallis. Class aptent taciti sociosqu ad
-                          litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse
-                          orci sem,
-                        </p>
-                        <a className='comments__reply' href='#'>
-                          Reply
-                        </a>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                   <h4 className='comments__title'>Leave A Comment</h4>
                   <form className='comments__form'>

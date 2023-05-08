@@ -1,5 +1,16 @@
+import { IUser } from './products.interface';
+
+export interface IComment {
+  createdAt: Date;
+  id: number;
+  userId: number;
+  postId: number;
+  text: string;
+  user: IUser;
+}
+
 export interface IPost {
-  id:string
+  id: number;
   title: string;
   text: string;
   tags: [];
@@ -10,12 +21,12 @@ export interface IPost {
   textMiniOne: string;
   textMiniTwo: string;
   quote: string;
-}
-export interface IPosts {
-  posts: IPost[];
-  count:number
+  createdAt: Date;
+  userId: number;
+  postComments: IComment[];
 }
 
-export interface IPostsCount {
+export interface IPosts {
+  rows: IPost[];
   count: number;
 }

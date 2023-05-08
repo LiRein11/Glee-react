@@ -3,14 +3,37 @@ import Footer from '../Footer';
 import Header from '../Header';
 import { useQuery } from 'react-query';
 import { getAllPosts } from '../../http/postAPI';
-import { IPost, IPosts, IPostsCount } from '../posts.interface';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { IPosts } from '../posts.interface';
+import { NavLink } from 'react-router-dom';
 import Pagination from '../Pagination';
+import { AppDispatch } from '../../store';
+import { useDispatch } from 'react-redux';
+import { fetchOneBasket } from '../../store/slices/cartSlice';
+import jwt_decode from 'jwt-decode';
+import { IUser } from '../products.interface';
 
 const BlogBlock = () => {
-  const { data } = useQuery<IPost[] & IPostsCount>('fetchAllPost', getAllPosts);
-  console.log(data);
-  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const [page, setPage] = React.useState(1);
+
+  const token = localStorage.getItem('token');
+
+  const { data: posts } = useQuery<IPosts>(['fetchAllPost', page, 2], () => getAllPosts(page, 2));
+  console.log(posts);
+
+  React.useEffect(() => {
+    dispatch(fetchOneBasket());
+  }, []);
+
+  const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  };
+
+  const user: IUser = jwt_decode(token ? token : '');
+  console.log(user);
 
   return (
     <>
@@ -39,7 +62,7 @@ const BlogBlock = () => {
             <div className='container'>
               <div className='blog-page__inner'>
                 <div className='blog-page__content'>
-                  {data?.map((post) => (
+                  {posts?.rows.map((post) => (
                     <div className='blog-item'>
                       <div className='blog-item__box'>
                         <NavLink to={'/blogDetails/' + post.id}>
@@ -50,9 +73,11 @@ const BlogBlock = () => {
                           />
                         </NavLink>
                         <div className='blog-item__info'>
-                          <span className='blog-item__date'>28 JANUARY, 2020</span>
+                          <span className='blog-item__date'>
+                            {new Date(post?.createdAt).toLocaleDateString('ru-RU', options)}
+                          </span>
                           <a className='blog-item__author' href='#'>
-                            BY ADMIN
+                            By {user.role}
                           </a>
                         </div>
                       </div>
@@ -195,7 +220,13 @@ const BlogBlock = () => {
                   </div>
                 </div>
               </div>
-              <Pagination devices={data ? data : undefined} limit={2} />
+              <Pagination
+                devices={posts ? posts : undefined}
+                limit={2}
+                count={posts?.count}
+                pageBlog={page}
+                setPageBlog={setPage}
+              />
             </div>
           </section>
         </section>

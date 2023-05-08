@@ -598,7 +598,7 @@
     color: $default;
   }
   &__buttons {
-    cursor:pointer;
+    cursor: pointer;
     & + .related__buttons {
       margin-left: 20px;
     }
@@ -610,7 +610,7 @@
     background-color: #fff;
   }
   &__buttons--active {
-    cursor:pointer;
+    cursor: pointer;
     border-color: #edf1f4;
   }
   &__items {
@@ -1255,7 +1255,7 @@
   }
   &__right-text {
     display: inline-block;
-    margin-left: 30px;
+    margin-left: 10px;
     color: #a1a1a1;
   }
   &__right-link {
@@ -1269,6 +1269,9 @@
 
 .comments {
   margin-bottom: 90px;
+  &__content {
+    width: -webkit-fill-available;
+  }
   &__title {
     margin-bottom: 60px;
     font-size: 24px;
