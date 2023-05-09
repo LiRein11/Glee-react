@@ -16,6 +16,7 @@ export interface IPost {
   tags: [];
   imageUrl: string;
   smallImageUrl: string;
+  smallestImageUrl: string;
   miniTitleTwo: string;
   miniTitleOne: string;
   textMiniOne: string;
@@ -23,6 +24,7 @@ export interface IPost {
   quote: string;
   createdAt: Date;
   userId: number;
+  user: IUser;
   postComments: IComment[];
 }
 

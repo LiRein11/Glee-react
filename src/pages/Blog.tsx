@@ -1,5 +1,5 @@
 import React from 'react';
-import BlogBlock from '../components/BlogBlock';
+import BlogBlock from '../components/Blog/BlogBlock';
 
 const Blog = () => <BlogBlock />;
 

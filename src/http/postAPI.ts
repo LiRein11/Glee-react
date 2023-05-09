@@ -17,8 +17,20 @@ export const getAllPosts = async (page?, limit?) => {
   return data;
 };
 
-// export const getCommentsByPost = async (id: number | undefined) => {
-//   const { data } = await $host.get(`api/comment/post/${id}`);
+export const createComment = async (id: string | undefined, text: string) => {
+  const { data } = await $authHost.post(`api/comment/post/${id}`, { text });
 
-//   return data;
-// };
+  return data;
+};
+
+export const getCommentsByPost = async (id: number | undefined) => {
+  const { data } = await $host.get(`api/comment/post/${id}`);
+
+  return data;
+};
+
+export const deleteComment = async (id: number) => {
+  const { data } = await $authHost.delete('api/comment', { data: { id } });
+
+  return data;
+};

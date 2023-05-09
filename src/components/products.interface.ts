@@ -40,6 +40,7 @@ export interface IBrand {
 }
 
 export interface IDataToken {
+  id:number;
   exp: number;
   email: string;
   role: string;

@@ -1,16 +1,18 @@
 import React from 'react';
-import Footer from '../Footer';
-import Header from '../Header';
+import Footer from '../../Footer';
+import Header from '../../Header';
 import { useQuery } from 'react-query';
-import { getAllPosts } from '../../http/postAPI';
-import { IPosts } from '../posts.interface';
+import { getAllPosts } from '../../../http/postAPI';
+import { IPosts } from '../../posts.interface';
 import { NavLink } from 'react-router-dom';
-import Pagination from '../Pagination';
-import { AppDispatch } from '../../store';
+import Pagination from '../../Pagination';
+import { AppDispatch } from '../../../store';
 import { useDispatch } from 'react-redux';
-import { fetchOneBasket } from '../../store/slices/cartSlice';
+import { fetchOneBasket } from '../../../store/slices/cartSlice';
 import jwt_decode from 'jwt-decode';
-import { IUser } from '../products.interface';
+import { IUser } from '../../products.interface';
+import RecentPosts from '../RecentPosts';
+
 
 const BlogBlock = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -19,7 +21,8 @@ const BlogBlock = () => {
 
   const token = localStorage.getItem('token');
 
-  const { data: posts } = useQuery<IPosts>(['fetchAllPost', page, 2], () => getAllPosts(page, 2));
+  const { data: posts } = useQuery<IPosts>(['fetchLimitPost', page, 2], () => getAllPosts(page, 2));
+
   console.log(posts);
 
   React.useEffect(() => {
@@ -161,63 +164,7 @@ const BlogBlock = () => {
                     </form> */}
                   </div>
 
-                  <div className='filter__item filter-posts'>
-                    <h4 className='filter__title'>
-                      <span>RECENT POSTS</span>
-                    </h4>
-                    <div className='filter-posts__item'>
-                      <div className='filter-posts__content'>
-                        <a className='filter-posts__img' href='#'>
-                          <img src='/images/blog/posts/1.jpg' alt='img posts' />
-                        </a>
-                        <div className='filter-posts__box'>
-                          <a className='filter-posts__title' href='#'>
-                            Corem ipsum dolor tetur adipisicing elit
-                          </a>
-                          <p className='filter-posts__date'>28 JANUARY, 2020</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className='filter-posts__item'>
-                      <div className='filter-posts__content'>
-                        <a className='filter-posts__img' href='#'>
-                          <img src='/images/blog/posts/2.jpg' alt='img posts' />
-                        </a>
-                        <div className='filter-posts__box'>
-                          <a className='filter-posts__title' href='#'>
-                            Fdipisicing elit, sed do eiusmod tempor
-                          </a>
-                          <p className='filter-posts__date'>28 JANUARY, 2020</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className='filter-posts__item'>
-                      <div className='filter-posts__content'>
-                        <a className='filter-posts__img' href='#'>
-                          <img src='/images/blog/posts/3.jpg' alt='img posts' />
-                        </a>
-                        <div className='filter-posts__box'>
-                          <a className='filter-posts__title' href='#'>
-                            Eonsectetur adipisicing elit, sed do eiusmod
-                          </a>
-                          <p className='filter-posts__date'>28 JANUARY, 2020</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className='filter-posts__item'>
-                      <div className='filter-posts__content'>
-                        <a className='filter-posts__img' href='#'>
-                          <img src='/images/blog/posts/4.jpg' alt='img posts' />
-                        </a>
-                        <div className='filter-posts__box'>
-                          <a className='filter-posts__title' href='#'>
-                            Gnim ad minim veniam, quis nostrud
-                          </a>
-                          <p className='filter-posts__date'>28 JANUARY, 2020</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <RecentPosts />
                 </div>
               </div>
               <Pagination

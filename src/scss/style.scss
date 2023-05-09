@@ -1278,6 +1278,34 @@
     @extend %rubik-700;
     color: #436372;
   }
+  &__close-btn {
+    position: absolute;
+    right: 32px;
+    top: 44px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+  }
+  &__close-btn:hover {
+    opacity: 1;
+  }
+  &__close-btn:before,
+  &__close-btn:after {
+    position: absolute;
+    left: 14px;
+    top: -2px;
+    content: ' ';
+    height: 33px;
+    width: 2px;
+    background-color: #333;
+  }
+  &__close-btn:before {
+    transform: rotate(45deg);
+  }
+  &__close-btn:after {
+    transform: rotate(-45deg);
+  }
+
   &__comment {
     display: flex;
     align-items: flex-start;
@@ -1289,6 +1317,8 @@
   &__img {
     object-fit: cover;
     margin-right: 30px;
+    height: 100px;
+    width: 100px;
   }
   &__info {
     display: flex;
