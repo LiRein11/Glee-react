@@ -51,7 +51,7 @@ const Header: FC = () => {
                   Catalog
                 </a>
                 <div className='wrapper'>
-                  <div className='wrapperContent'>
+                  <div className='wrapper__content'>
                     <NavLink className='menu__list-link' to='/catalogOne'>
                       CatalogOne
                     </NavLink>
@@ -70,7 +70,7 @@ const Header: FC = () => {
                   Blog
                 </a>
                 <div className='wrapper'>
-                  <div className='wrapperContent'>
+                  <div className='wrapper__content'>
                   <NavLink className='menu__list-link' to='/blog'>
                       Blog
                     </NavLink>

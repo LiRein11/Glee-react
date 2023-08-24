@@ -24,7 +24,7 @@
     position: relative;
   }
   &__list-item--active:hover {
-    .abd {
+    .wrapper {
       visibility: visible;
       opacity: 1;
     }
@@ -47,7 +47,7 @@
   transition: visibility 4s, opacity 0.5s linear;
 }
 
-.wrapperContent {
+.wrapper__content {
   display: inline-grid;
 }
 
