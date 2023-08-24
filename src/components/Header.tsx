@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { RootState } from '../store';
 import { useSelector } from 'react-redux';
@@ -7,7 +7,7 @@ import { useFavorites } from '../hooks/useFavorites';
 const Header: FC = () => {
   const cart = useSelector((state: RootState) => state.cart);
   const { favoritesDevices, isLoading, refetch } = useFavorites();
-
+  const [a, setA] = useState(false)
   // const [count, setCount] = React.useState(0);
 
   // const onClickCountPlus = () => {
@@ -25,6 +25,11 @@ const Header: FC = () => {
     navigate(token ? '/account' : '/login');
   };
 
+  const clickBtn = () => {
+    setA(prev => !prev) 
+  }
+  console.log(a)
+
   return (
     <header className='header'>
       <div className='container-large'>
@@ -32,11 +37,11 @@ const Header: FC = () => {
           <Link className='logo' to='/'>
             <img className='logo__img' src='/images/logo.png' alt='logo' />
           </Link>
-          <nav className='menu'>
-            <button className='menu__btn'>
+          <nav className="menu">
+            <button onClick={clickBtn} className='menu__btn'>
               <span></span>
             </button>
-            <ul className='menu__list'>
+            <ul className={a ? 'menu__list menu__list--active' : 'menu__list'}>
               <li className='menu__list-item'>
                 <Link className='menu__list-link' to='/'>
                   Home +
@@ -48,11 +53,36 @@ const Header: FC = () => {
                 </Link>
               </li>
               <li className='menu__list-item'>
-                <a className='menu__list-link' href='#'>
-                  Services
-                </a>
+                   <NavLink className='menu__list-link' to='/catalogOne'>
+                      CatalogOne
+                  </NavLink>
               </li>
-              <li className='menu__list-item menu__list-item--active'>
+              <li className='menu__list-item'>
+              <NavLink className='menu__list-link' to='/catalogTwo'>
+                      CatalogTwo
+                    </NavLink>
+              </li>
+              <li className='menu__list-item'>
+              <NavLink className='menu__list-link' to='/productDetails/1'>
+                      ProductDetails
+                    </NavLink>
+              </li>
+              <li className='menu__list-item'>
+              <NavLink className='menu__list-link' to='/blog'>
+                      Blog
+                    </NavLink>
+              </li>
+              <li className='menu__list-item'>
+              <NavLink className='menu__list-link' to='/blogDetails/1'>
+                      BlogDetails
+                    </NavLink>
+              </li>
+              <li className='menu__list-item'>
+              <NavLink className='menu__list-link' to='/terms'>
+                      Terms
+                    </NavLink>
+              </li>
+              {/* <li className='menu__list-item menu__list-item--active'>
                 <a className='menu__list-link' href='#'>
                   Pages
                 </a>
@@ -78,12 +108,7 @@ const Header: FC = () => {
                     </NavLink>
                   </div>
                 </div>
-              </li>
-              <li className='menu__list-item'>
-                <a className='menu__list-link' href='#'>
-                  News
-                </a>
-              </li>
+              </li> */}
               <li className='menu__list-item'>
                 <Link className='menu__list-link' to='/contact'>
                   Contact
