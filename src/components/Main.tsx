@@ -207,10 +207,10 @@ const Main = () => {
           <div className='design__items'>
             {allDevices
               ? filter.filterDesignCategory === 0
-                ? allDevices.rows.map((obj) => (
+                ? allDevices?.rows.map((obj) => (
                     <>{obj.text === 'Classic' ? <DesignItem item={obj} key={obj.id} /> : ''}</>
                   ))
-                : allDevices.rows.map((obj) =>
+                : allDevices?.rows.map((obj) =>
                     obj.typeId === filter.filterDesignCategory && obj.text === 'Classic' ? (
                       <DesignItem item={obj} key={obj.id} />
                     ) : (

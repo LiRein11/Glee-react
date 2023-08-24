@@ -51,13 +51,12 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+      "defaults",
+      "not IE 11"
     ],
     "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
+      "last 2 chrome version",
+      "last 2 firefox version",
       "last 1 safari version"
     ]
   }
