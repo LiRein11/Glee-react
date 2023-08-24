@@ -42,12 +42,6 @@ const ContactBlock = () => {
                     height='44'
                     viewBox='0 0 31 44'>
                     <defs>
-                      {/* <style>
-                    .cls-1 {
-                      fill: #a3bbc8;
-                      fill-rule: evenodd;
-                    }
-                  </style> */}
                     </defs>
                     <path
                       id='icon'
@@ -72,10 +66,6 @@ const ContactBlock = () => {
                     viewBox='0 0 37 33.968'>
                     <defs>
                       <style>
-                        {/* .cls-1 {
-                      fill: #fff;
-                      fill-rule: evenodd;
-                    } */}
                       </style>
                     </defs>
                     <path
@@ -100,12 +90,7 @@ const ContactBlock = () => {
                     height='44'
                     viewBox='0 0 37 44'>
                     <defs>
-                      {/* <style>
-                    .cls-1 {
-                      fill: #a3bbc8;
-                      fill-rule: evenodd;
-                    }
-                  </style> */}
+
                     </defs>
                     <path
                       id='icon'
@@ -151,18 +136,7 @@ const ContactBlock = () => {
       </main>
 
       <Footer />
-      {/* <script
-        src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap&v=weekly"
-        async></script>
-      <script>
-        let map; function initMap(){' '}
-        {
-          (map = new google.maps.Map(document.getElementById('map'), {
-            center: { lat: 29.76804442779756, lng: -95.35843470871232 },
-            zoom: 9,
-          }))
-        }
-      </script> */}
+
     </>
   );
 };

@@ -21,7 +21,6 @@ const Pagination: FC<{
 
   const filter = useSelector((state: RootState) => state.filter);
   const dispatch = useDispatch<AppDispatch>();
-  // const [pageNoSlice, setPageNoSlice] = React.useState(1);
 
   const [pageNumbers, setPageNumbers] = React.useState<number[]>([]);
   console.log(limit);
@@ -71,21 +70,6 @@ const Pagination: FC<{
               />
             </svg>
           </button>
-          {/* <ul className='pagination__list'>
-            {pageNumbers.map((el, i) => (
-              <li className='pagination__item'>
-                <div
-                  className={
-                    i === pageNoSlice - 1
-                      ? 'pagination__link pagination__link--active'
-                      : 'pagination__link'
-                  }
-                  onClick={() => onClickPaginationNoSlice(i)}>
-                  {el}
-                </div>
-              </li>
-            ))}
-          </ul> */}
           <button
             className={
               pageNoSlice === pageNumbers.length

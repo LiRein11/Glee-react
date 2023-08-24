@@ -4,7 +4,7 @@ import React, { FC, useEffect } from 'react';
 import { Slider } from '@mui/material';
 import { useQuery } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchDevices, fetchDevicesAll, getBrands, getTypes } from '../../http/deviceAPI';
+import { fetchDevicesAll, getBrands, getTypes } from '../../http/deviceAPI';
 import { AppDispatch, RootState } from '../../store';
 import { fetchOneBasket } from '../../store/slices/cartSlice';
 import {
@@ -15,7 +15,6 @@ import {
   toggleActiveIndexArrTypes,
 } from '../../store/slices/filterSlice';
 import { IBrand, IType } from '../products.interface';
-import CatalogContent from './CatalogContent';
 
 const CatalogLeftBar: FC = () => {
   const filter = useSelector((state: RootState) => state.filter);

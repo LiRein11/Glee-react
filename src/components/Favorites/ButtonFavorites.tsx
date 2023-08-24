@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { useFavorites } from '../../hooks/useFavorites';
 import { toggleFavorites } from '../../http/deviceAPI';
-import { IBasketDevice, IProductItem } from '../products.interface';
+import { IBasketDevice} from '../products.interface';
 import { useLocation } from 'react-router-dom';
 
 const ButtonFavorites: FC<{ deviceBasket: IBasketDevice }> = ({ deviceBasket }) => {
@@ -11,7 +11,7 @@ const ButtonFavorites: FC<{ deviceBasket: IBasketDevice }> = ({ deviceBasket }) 
   const location = useLocation();
   const pathCatalogTwo = location.pathname === '/catalogTwo';
 
-  const { favoritesDevices, isLoading, refetch } = useFavorites();
+  const { favoritesDevices} = useFavorites();
 
   const queryClient = useQueryClient();
 

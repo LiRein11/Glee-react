@@ -38,7 +38,7 @@
   }
 }
 
-.abd {
+.wrapper {
   background-color: aliceblue;
   position: absolute;
   padding: 0 30px 0px 0;
@@ -47,7 +47,7 @@
   transition: visibility 4s, opacity 0.5s linear;
 }
 
-.abdd {
+.wrapperContent {
   display: inline-grid;
 }
 

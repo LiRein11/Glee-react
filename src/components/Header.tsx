@@ -7,12 +7,7 @@ import { useFavorites } from '../hooks/useFavorites';
 const Header: FC = () => {
   const cart = useSelector((state: RootState) => state.cart);
   const { favoritesDevices, isLoading, refetch } = useFavorites();
-  const [a, setA] = useState(false)
-  // const [count, setCount] = React.useState(0);
-
-  // const onClickCountPlus = () => {
-  //   setCount(count + 1);
-  // };
+  const [stateOpen, setStateOpen] = useState(false)
 
   React.useEffect(() => {
     refetch();
@@ -26,9 +21,8 @@ const Header: FC = () => {
   };
 
   const clickBtn = () => {
-    setA(prev => !prev) 
+    setStateOpen(prev => !prev) 
   }
-  console.log(a)
 
   return (
     <header className='header'>
@@ -41,7 +35,7 @@ const Header: FC = () => {
             <button onClick={clickBtn} className='menu__btn'>
               <span></span>
             </button>
-            <ul className={a ? 'menu__list menu__list--active' : 'menu__list'}>
+            <ul className={stateOpen ? 'menu__list menu__list--active' : 'menu__list'}>
               <li className='menu__list-item'>
                 <Link className='menu__list-link' to='/'>
                   Home +
@@ -52,42 +46,12 @@ const Header: FC = () => {
                   About
                 </Link>
               </li>
-              <li className='menu__list-item'>
-                   <NavLink className='menu__list-link' to='/catalogOne'>
-                      CatalogOne
-                  </NavLink>
-              </li>
-              <li className='menu__list-item'>
-              <NavLink className='menu__list-link' to='/catalogTwo'>
-                      CatalogTwo
-                    </NavLink>
-              </li>
-              <li className='menu__list-item'>
-              <NavLink className='menu__list-link' to='/productDetails/1'>
-                      ProductDetails
-                    </NavLink>
-              </li>
-              <li className='menu__list-item'>
-              <NavLink className='menu__list-link' to='/blog'>
-                      Blog
-                    </NavLink>
-              </li>
-              <li className='menu__list-item'>
-              <NavLink className='menu__list-link' to='/blogDetails/1'>
-                      BlogDetails
-                    </NavLink>
-              </li>
-              <li className='menu__list-item'>
-              <NavLink className='menu__list-link' to='/terms'>
-                      Terms
-                    </NavLink>
-              </li>
-              {/* <li className='menu__list-item menu__list-item--active'>
-                <a className='menu__list-link' href='#'>
-                  Pages
+              <li className='menu__list-item menu__list-item--active'>
+                <a className='menu__list-link' href="#">
+                  Catalog
                 </a>
-                <div className='abd'>
-                  <div className='abdd'>
+                <div className='wrapper'>
+                  <div className='wrapperContent'>
                     <NavLink className='menu__list-link' to='/catalogOne'>
                       CatalogOne
                     </NavLink>
@@ -97,18 +61,31 @@ const Header: FC = () => {
                     <NavLink className='menu__list-link' to='/productDetails/1'>
                       ProductDetails
                     </NavLink>
-                    <NavLink className='menu__list-link' to='/blog'>
+                  </div>
+                </div>
+              </li>
+
+              <li className='menu__list-item menu__list-item--active'>
+                <a className='menu__list-link' href="#">
+                  Blog
+                </a>
+                <div className='wrapper'>
+                  <div className='wrapperContent'>
+                  <NavLink className='menu__list-link' to='/blog'>
                       Blog
                     </NavLink>
                     <NavLink className='menu__list-link' to='/blogDetails/1'>
                       BlogDetails
                     </NavLink>
-                    <NavLink className='menu__list-link' to='/terms'>
-                      Terms
-                    </NavLink>
                   </div>
                 </div>
-              </li> */}
+              </li>
+              <li className='menu__list-item'>
+              <NavLink className='menu__list-link' to='/terms'>
+                      Terms
+                    </NavLink>
+              </li>
+          
               <li className='menu__list-item'>
                 <Link className='menu__list-link' to='/contact'>
                   Contact

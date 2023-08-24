@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ProductItem from './ProductItem';
 import Slider from './Slider';
 
-import axios from 'axios';
 import { useQuery } from 'react-query';
 import DesignItem from './DesignItem';
 import { IDataToken } from './products.interface';
@@ -21,12 +20,11 @@ import { fetchOneBasket } from '../store/slices/cartSlice';
 import { useFavorites } from '../hooks/useFavorites';
 import { fetchDevices, fetchDevicesAll } from '../http/deviceAPI';
 import jwt_decode from 'jwt-decode';
-import { NavLink, useNavigate } from 'react-router-dom';
 import Posts from './Posts';
 import { setInited } from '../store/slices/mainSlice';
 
 const Main = () => {
-  const { filter, main } = useSelector((state: RootState) => state);
+  const { filter } = useSelector((state: RootState) => state);
   const dispatch = useDispatch<AppDispatch>();
 
   const token: string | null = localStorage.getItem('token');
@@ -68,9 +66,9 @@ const Main = () => {
 
   console.log(localStorage.getItem('inited'))
 
-  const a = localStorage.getItem('inited') === 'true'
-  console.log(a)
-  if(a === false){
+  const inited = localStorage.getItem('inited') === 'true'
+
+  if(inited === false){
     return (
       <div className='container' style={{textAlign: 'center', marginTop: '20px'}}>
         <div>Для работы с ассортиментом и комментирования нужно авторизоваться справа в верхнем углу</div>

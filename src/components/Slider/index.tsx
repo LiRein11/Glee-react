@@ -19,17 +19,6 @@ const Slider = () => {
           </div>
           <img className="top-slider__img" src="images/slider/1.png" alt="slider img" />
         </div>
-        {/* <ol className={styles.carousel_indicators__numbers}>
-          <li data-target="'#sampleSlide'" data-slide-to="0" class="active">
-            1
-          </li>
-          <li data-target="'#sampleSlide'" data-slide-to="1">
-            2
-          </li>
-          <li data-target="'#sampleSlide'" data-slide-to="2">
-            3
-          </li>
-        </ol> */}
       </Carousel.Item>
       <Carousel.Item>
         <div className="top-slider__item">

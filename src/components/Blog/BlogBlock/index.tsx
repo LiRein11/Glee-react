@@ -109,12 +109,6 @@ const BlogBlock = () => {
                           height='17'
                           viewBox='0 0 17.03 17'>
                           <defs>
-                            {/* <style>
-                          .cls-1 {
-                            fill: #094074;
-                            fill-rule: evenodd;
-                          }
-                        </style> */}
                           </defs>
                           <path
                             className='cls-1'
@@ -129,44 +123,7 @@ const BlogBlock = () => {
                   <div className='filter__item filter-category'>
                     <h4 className='filter__title'>
                       <span>TAGS</span>
-                    </h4>
-                    {/* <form className='filter-category__form' action='#'>
-                      <label className='filter-category__label'>
-                        <input className='filter-category__input' type='checkbox' defaultChecked />
-                        <div className='filter-category__checkbox'>
-                          <span>Chair</span>
-                          <span>{'>'}</span>
-                        </div>
-                      </label>
-                      <label className='filter-category__label'>
-                        <input className='filter-category__input' type='checkbox' />
-                        <div className='filter-category__checkbox'>
-                          <span>Table</span>
-                          <span>{'>'}</span>
-                        </div>
-                      </label>
-                      <label className='filter-category__label'>
-                        <input className='filter-category__input' type='checkbox' />
-                        <div className='filter-category__checkbox'>
-                          <span>Lamp</span>
-                          <span>{'>'}</span>
-                        </div>
-                      </label>
-                      <label className='filter-category__label'>
-                        <input className='filter-category__input' type='checkbox' />
-                        <div className='filter-category__checkbox'>
-                          <span>Watch</span>
-                          <span>{'>'}</span>
-                        </div>
-                      </label>
-                      <label className='filter-category__label'>
-                        <input className='filter-category__input' type='checkbox' />
-                        <div className='filter-category__checkbox'>
-                          <span>Clock</span>
-                          <span>{'>'}</span>
-                        </div>
-                      </label>
-                    </form> */}
+                    </h4>  
                   </div>
 
                   <RecentPosts />

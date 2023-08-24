@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import Footer from '../../Footer';
 import Header from '../../Header';
-// import Typography from '@material-ui/Typography';
 
 import { useQuery } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,15 +17,9 @@ const CatalogBlockOne = () => {
   const filter = useSelector((state: RootState) => state.filter);
   const dispatch = useDispatch<AppDispatch>();
 
-  // const [brandId, setBrandId] = React.useState(filter.activeIndexBrands);
-  // const [typeId, setTypeId] = React.useState(filter.activeIndexTypes);
-  // const [page, setPage] = React.useState(1);
   const [limit, setLimit] = React.useState(9);
   const [pageNumbers, setPageNumbers] = React.useState<number[]>([]);
 
-  // const { data: types, isLoading: loadingTypes } = useQuery<IType[]>('fetchTypes', getTypes);
-  // const { data: brands, isLoading: loadingBrands } = useQuery('fetchBrands', getBrands);
-  // const { data: allDevices } = useQuery('fetchAllDevices', fetchDevicesAll);
   const { data: devices, refetch } = useQuery(
     [
       'devices',
@@ -48,42 +41,11 @@ const CatalogBlockOne = () => {
       ),
   );
 
-  // function handleChanges(event: Event, newValue: any) {
-  //   dispatch(setCurrentPrice(newValue));
-  // }
-
   useEffect(() => {
     dispatch(fetchOneBasket());
     dispatch(fetchTypesThunk());
     dispatch(fetchBrandsThunk());
   }, []);
-
-  // useEffect(() => {
-  //   const lastPage = Math.ceil(devices !== undefined ? devices.count / limit : 0);
-  //   const newPageNumbers: number[] = [];
-
-  //   for (let i: number = 1; i <= lastPage; i++) {
-  //     newPageNumbers.push(i);
-  //   }
-  //   setPageNumbers(newPageNumbers);
-  // }, [devices, limit, filter]);
-
-  // const toggleTypes = async (index: number | null) => {
-  //   dispatch(toggleActiveIndexArrTypes(index));
-  //   setTypeId(index);
-  // };
-
-  // const toggleBrands = (index: number | null) => {
-  //   dispatch(toggleActiveIndexArrBrands(index));
-  //   setBrandId(index);
-  // };
-
-  // const onClickPagination = (index: number) => {
-  //   setPage(index + 1);
-  // };
-
-  // console.log(devices);
-  console.log(pageNumbers);
 
   return (
     <>
