@@ -9,11 +9,15 @@ import { check, getOneUser, login, registration } from '../../http/userAPI';
 import '../../scss/login.scss';
 import { IDataToken, IUser } from '../products.interface';
 import { useQuery } from 'react-query';
+import { setInited } from '../../store/slices/mainSlice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../store';
 // import { useQuery } from 'react-query';
 
 const LoginBlock: React.FC = () => {
   const [email, setEmail] = React.useState<string>('');
   const [password, setPassword] = React.useState<string>('');
+  const dispatch = useDispatch<AppDispatch>();
 
   const location = useLocation();
   const isLogin = location.pathname === '/login';
@@ -37,6 +41,7 @@ const LoginBlock: React.FC = () => {
         const response = await registration(email, password);
       }
       navigate('/');
+      dispatch(setInited())
     } catch (e: any) {
       alert(e.response.data.message);
     }

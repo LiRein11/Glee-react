@@ -23,21 +23,21 @@ import { fetchDevices, fetchDevicesAll } from '../http/deviceAPI';
 import jwt_decode from 'jwt-decode';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Posts from './Posts';
+import { setInited } from '../store/slices/mainSlice';
 
 const Main = () => {
-  const { filter, cart } = useSelector((state: RootState) => state);
+  const { filter, main } = useSelector((state: RootState) => state);
   const dispatch = useDispatch<AppDispatch>();
 
   const token: string | null = localStorage.getItem('token');
   const limit: number = 14;
-  const navigate = useNavigate();
 
   const { data, isError } = useQuery(['devices', null, null, 1, limit], () =>
     fetchDevices(null, null, 1, limit),
   );
   const { data: allDevices } = useQuery('fetchAllDevices', fetchDevicesAll);
 
-  const { favoritesDevices, isLoading, refetch } = useFavorites();
+  const { favoritesDevices } = useFavorites();
   console.log(data);
   React.useEffect(() => {
     dispatch(fetchOneBasket());
@@ -45,7 +45,6 @@ const Main = () => {
 
   React.useEffect(() => {
     dispatch(fetchTypesThunk());
-
     if (token) {
       const data: IDataToken = jwt_decode(token);
       const dateNow = new Date();
@@ -66,6 +65,19 @@ const Main = () => {
     dispatch(setActiveDesignIndex(index));
     dispatch(setFilterDesignCategory(index));
   };
+
+  console.log(localStorage.getItem('inited'))
+
+  const a = localStorage.getItem('inited') === 'true'
+  console.log(a)
+  if(a === false){
+    return (
+      <div className='container' style={{textAlign: 'center', marginTop: '20px'}}>
+        <div>Для работы с ассортиментом и комментирования нужно авторизоваться справа в верхнем углу</div>
+        <button className='categories-info__item-btn' onClick={() => dispatch(setInited())}>Xорошо, понятно!</button>
+      </div>
+    )
+  }
 
   return (
     <main className='main'>

@@ -26,8 +26,10 @@ const BlogBlock = () => {
   console.log(posts);
 
   React.useEffect(() => {
-    dispatch(fetchOneBasket());
-  }, []);
+    if(token){
+      dispatch(fetchOneBasket());
+    }
+  }, [token]);
 
   const options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
@@ -35,8 +37,11 @@ const BlogBlock = () => {
     day: 'numeric',
   };
 
-  const user: IUser = jwt_decode(token ? token : '');
-  console.log(user);
+  let user: IUser
+
+  if(token){
+    user = jwt_decode(token ? token : '');
+  }
 
   return (
     <>
@@ -80,7 +85,7 @@ const BlogBlock = () => {
                             {new Date(post?.createdAt).toLocaleDateString('ru-RU', options)}
                           </span>
                           <a className='blog-item__author' href='#'>
-                            By {user.role}
+                            By {user?.role}
                           </a>
                         </div>
                       </div>

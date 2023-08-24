@@ -20,6 +20,7 @@ import Cart from './pages/Cart';
 import Favorites from './pages/Favorites';
 
 const App: FC = () => {
+
   return (
     <>
       <Provider store={store}>
