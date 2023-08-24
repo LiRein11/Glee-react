@@ -158,6 +158,8 @@ const LoginBlock: React.FC = () => {
             </section>
             <section className='modalAuth'>
               <div className='container'>
+                <p>login:user/admin@mail.ru , 
+                  <br/> password:123 </p>
                 <form className='modalAuth__form' action='#'>
                   <label className='modalAuth__label'>
                     Username or email address *
