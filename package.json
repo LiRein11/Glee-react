@@ -38,7 +38,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build --env REACT_APP_API_URL=https://backendglee-sergey11200011.b4a.run/",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "tsc": "tsc"
